@@ -41,7 +41,6 @@ export default class MyDocument extends Document {
           <link rel="apple-touch-icon" href="/images/icons/maskable_icon_x192.png"/>
           <meta name="og:title" content="iMachine" />
           <meta name="twitter:card" content="summary_large_image" />
-          <title>iMachine</title>
         </Head>
         <body>
         <Main />

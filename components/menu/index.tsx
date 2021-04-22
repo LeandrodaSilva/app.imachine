@@ -11,6 +11,7 @@ import Link from "next/link";
 import {closeMenu} from "../../redux/actions/menuActions";
 import {connect} from "react-redux";
 import {MouseEventHandler} from "react";
+import {router} from "next/client";
 
 interface MenuProps {
   isOpen: boolean,

@@ -1,4 +1,4 @@
-import {CLOSE_MENU, OPEN_MENU} from "../actions/menuActions";
+import {CLOSE_MENU, OPEN_MENU, TOGGLE_MENU} from "../actions/menuActions";
 import {AnyAction} from "redux";
 
 export interface MenuState {
@@ -11,6 +11,8 @@ const menuReducer = (state: MenuState = {isOpen: false}, action: AnyAction) => {
       return {...state, isOpen: false};
     case OPEN_MENU:
       return {...state, isOpen: true};
+    case TOGGLE_MENU:
+      return {...state, isOpen: !state.isOpen};
     default:
       return {...state};
   }

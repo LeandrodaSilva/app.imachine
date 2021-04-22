@@ -1,18 +1,13 @@
 import Head from 'next/head'
-import Menu from "../components/menu";
-import Header from "../components/header";
-import Main from "../components/main";
+import Layout from "../components/layout";
 
 function Home(props) {
   return (
-    <>
+    <Layout>
       <Head>
         <title>iMachine</title>
       </Head>
-      <Menu />
-      <Header />
-      <Main title="Dashboard [ Lycra ]"/>
-    </>
+    </Layout>
   )
 }
 

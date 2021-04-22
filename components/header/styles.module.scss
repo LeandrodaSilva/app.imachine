@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    background-color: #272B41;
+    color: white;
+    height: 50px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    .logo {
+        font-size: 24px;
+        padding: 4px;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:first-letter {
+            color: #0053ff;
+            font-weight: bold;
+        }
+    }
+
+    .menuButton {
+        border: none;
+    }
+}
