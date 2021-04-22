@@ -1,12 +1,13 @@
-import Head from 'next/head'
 import Layout from "../components/layout";
+import Page from "../components/page";
+import Card from "../components/card";
 
 function Home(props) {
   return (
     <Layout>
-      <Head>
-        <title>iMachine</title>
-      </Head>
+      <Page title="Dashboard">
+        <Card title="Previsão Geral" />
+      </Page>
     </Layout>
   )
 }

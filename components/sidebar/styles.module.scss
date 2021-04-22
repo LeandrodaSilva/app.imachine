@@ -16,7 +16,7 @@
     .close {
         display: flex;
         align-items: flex-start;
-        justify-content: flex-start;
+        justify-content: center;
         background-color: #272B41;
         color: white;
         width: 60px;
@@ -28,6 +28,11 @@
             .list {
                 .item {
                     justify-content: center;
+
+                    svg {
+                        margin-right: 0;
+                        width: 100%;
+                    }
 
                     span {
                         display: none;

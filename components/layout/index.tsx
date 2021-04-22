@@ -11,7 +11,7 @@ function Layout(props) {
     <div className={styles.layout}>
       <Header />
       <Sidebar>
-        <main>teste</main>
+        {children}
       </Sidebar>
     </div>
   )

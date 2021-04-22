@@ -1,18 +1,12 @@
-import Head from 'next/head'
-import Menu from "../../components/menu";
-import Header from "../../components/header";
-import Main from "../../components/main";
+import Page from "../../components/page";
+import Layout from "../../components/layout";
 
 function Settings(props) {
   return (
-    <>
-      <Head>
-        <title>Configurações - Imachine</title>
-      </Head>
-      <Menu />
-      <Header />
-      <Main title="Configurações" />
-    </>
+    <Layout>
+      <Page title="Configurações">
+      </Page>
+    </Layout>
   )
 }
 
