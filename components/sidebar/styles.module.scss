@@ -14,8 +14,8 @@
         display: flex;
         align-items: flex-start;
         justify-content: flex-start;
-        background-color: #272B41;
-        color: white;
+        //background-color: #272B41;
+        color: black;
         width: 300px;
         height: calc(100vh - 50px);
         padding: 1em;
@@ -26,13 +26,12 @@
         display: flex;
         align-items: flex-start;
         justify-content: center;
-        background-color: #272B41;
-        color: white;
+        //background-color: #272B41;
+        color: black;
         width: 60px;
         height: calc(100vh - 50px);
         padding: 5px;
         transition: width ease-in .1s;
-
         .menu {
             .list {
                 .item {
@@ -65,10 +64,12 @@
                 width: 100%;
                 border-radius: 4px;
                 padding: 10px 4px;
+                color: #343952;
 
                 &:hover {
                     cursor: pointer;
-                    background-color: rgb(54, 59, 88);
+                    background-color: rgba(54, 59, 88, 0.1);
+                    color: black;
                 }
 
                 svg {
