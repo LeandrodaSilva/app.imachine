@@ -25,6 +25,7 @@ function Page(props: PageProps) {
 
         <footer className={styles.footer}>
           <span>2021 © iMachine</span>
+          <img src="/img/icon-techplus.svg" alt="Logo" height={20}/>
         </footer>
       </div>
     </>

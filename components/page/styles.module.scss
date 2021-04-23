@@ -24,13 +24,20 @@
   .footer {
     position: fixed;
     bottom: 0;
+    right: 0;
+    border-top-left-radius: 8px;
     padding: 5px 20px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+    width: max-content;
     min-height: 30px;
     background-color: white;
     color: rgb(111, 111, 111);
+
+    img {
+      padding-left: 8px;
+    }
   }
 }
