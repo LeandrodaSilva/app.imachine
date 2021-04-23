@@ -1,9 +1,15 @@
 .page {
+  display: block;
   width: 100%;
   background-color: #ececec;
+  overflow: auto;
+  overflow-x: hidden;
+  height: 100vh;
+  padding-bottom: 30px;
 
   .h1 {
     font-size: 20px;
+    padding-left: 10px;
   }
 
   .main {

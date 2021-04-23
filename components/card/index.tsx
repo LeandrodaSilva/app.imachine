@@ -1,7 +1,7 @@
 import style from "./styles.module.scss"
 
 interface CardProps {
-  title: string,
+  title?: string,
   children?: any
 }
 
@@ -14,9 +14,12 @@ function Card(props: CardProps) {
   return (
     <>
       <div className={style.card}>
-        <div className={style.header}>
-          <span>{title}</span>
-        </div>
+        {
+          title &&
+          <div className={style.header}>
+            <span>{title}</span>
+          </div>
+        }
         <div className={style.body}>
           {children}
         </div>

@@ -14,7 +14,9 @@ function Sidebar(props) {
       <div className={isOpen ? styles.open : styles.close}>
         <Menu />
       </div>
-      {children}
+      <div className={styles.children}>
+        {children}
+      </div>
     </div>
   )
 }

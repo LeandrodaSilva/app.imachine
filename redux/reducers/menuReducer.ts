@@ -5,7 +5,9 @@ export interface MenuState {
   isOpen: boolean
 }
 
-const menuReducer = (state: MenuState = {isOpen: false}, action: AnyAction) => {
+const menuReducer = (state: MenuState = {
+  isOpen: true
+}, action: AnyAction) => {
   switch (action.type) {
     case CLOSE_MENU:
       return {...state, isOpen: false};

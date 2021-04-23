@@ -1,5 +1,14 @@
 .container {
     display: flex;
+    position: fixed;
+    left: 0;
+    top: 50px;
+    width: 100%;
+
+    .children {
+        overflow-y: scroll;
+        width: 100%;
+    }
 
     .open {
         display: flex;

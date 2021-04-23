@@ -18,11 +18,14 @@ function Header(props: HeaderTypes) {
 
   return (
     <header className={styles.container}>
-      <div className="flex">
+      <div className={styles.flex}>
         <Button className={styles.menuButton} variant="outline-light" onClick={toggleMenu}>
           <MenuTwoTone />
         </Button>
         <Link href="/"><p className={styles.logo}>iMachine</p></Link>
+      </div>
+      <div>
+
       </div>
     </header>
   )
