@@ -38,7 +38,7 @@ function Login(props) {
     <>
       <div className={styles.login}>
         <div className={styles.background}>
-          <img src="/img/background.png"  alt="logo"/>
+          <img className={styles.img} src="/img/background.png"  alt="logo"/>
           <div className={styles.logo}>
             <img src="/img/icon-techplus.svg"  alt="logo"/>
           </div>

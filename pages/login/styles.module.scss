@@ -13,10 +13,12 @@
     width: auto;
     height: 100%;
 
-    img {
+    .img {
       width: 100vw;
       height: 100%;
       object-fit: cover;
+      filter: blur(3px);
+      -webkit-filter: blur(3px);
     }
 
     .logo {
