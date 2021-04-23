@@ -1,10 +1,11 @@
 import styles from "./styles.module.scss"
-import {MenuTwoTone} from "@material-ui/icons";
+import {ExitToAppTwoTone, MenuTwoTone} from "@material-ui/icons";
 import {Button} from "react-bootstrap";
 import {toggleMenu} from "../../redux/actions/menuActions";
 import {connect} from "react-redux";
 import {MouseEventHandler} from "react";
 import Link from "next/link"
+import {useRouter} from "next/router";
 
 interface HeaderTypes {
   isOpen: boolean,
@@ -15,6 +16,7 @@ function Header(props: HeaderTypes) {
   const {
     toggleMenu
   } = props;
+  const router = useRouter();
 
   return (
     <header className={styles.container}>
@@ -24,8 +26,13 @@ function Header(props: HeaderTypes) {
         </Button>
         <Link href="/"><p className={styles.logo}>iMachine</p></Link>
       </div>
-      <div>
 
+      <div className={styles.flex}>
+        <Button className={styles.menuButton}
+                variant="outline-light"
+                onClick={event => router.push('/login')}>
+          <ExitToAppTwoTone />
+        </Button>
       </div>
     </header>
   )
