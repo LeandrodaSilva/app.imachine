@@ -1,5 +1,8 @@
 .page {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: row;
   width: 100%;
   background-color: #ececec;
   overflow: auto;
@@ -13,7 +16,9 @@
   }
 
   .main {
+    width: 100%;
     padding: 10px;
+    margin-bottom: 40px;
   }
 
   .footer {
