@@ -8,6 +8,7 @@ const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
+  cursor: pointer;
 `
 
 const Container = styled.div`
@@ -30,7 +31,7 @@ const ImageContainer = styled.div`
   
   img {
     width: 100%;
-    height: auto;
+    height: 100%;
   }
 `
 
