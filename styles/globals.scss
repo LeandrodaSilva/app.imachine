@@ -70,3 +70,40 @@ a {
   align-items: center;
   justify-content: center;
 }
+
+.loadingBackground {
+  background: linear-gradient(269deg, #2e2f2e, #5d5c5c, #323232, #5b5b5b);
+  background-size: 800% 800%;
+
+  -webkit-animation: loading 7s ease-in infinite;
+  -moz-animation: loading 7s ease-in infinite;
+  -o-animation: loading 7s ease-in infinite;
+  animation: loading 7s ease-in infinite;
+}
+
+@-webkit-keyframes loading {
+  0%{background-position:0% 51%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 51%}
+}
+@-moz-keyframes loading {
+  0%{background-position:0% 51%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 51%}
+}
+@-o-keyframes loading {
+  0%{background-position:0% 51%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 51%}
+}
+@keyframes loading {
+  0% {
+    background-position: 0% 51%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 51%
+  }
+}
