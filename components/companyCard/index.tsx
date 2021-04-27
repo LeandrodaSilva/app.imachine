@@ -13,11 +13,31 @@ const Row = styled.div`
 
 const Container = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
   padding: 10px;
-  height: 200px;
+  min-height: 200px;
+  flex-wrap: wrap;
+  border-right: 3px solid transparent;
+
+  &:hover {
+    border-right: 3px solid black;
+    border-radius: 4px;
+    
+    button {
+      opacity: 1;
+      transition: opacity ease-in-out 0.3s;
+    }
+  }
+
+  button {
+    opacity: 0;
+  }
+
+  button:hover {
+    opacity: 0.3;
+  }
 `
 
 const ImageContainer = styled.div`
@@ -28,10 +48,13 @@ const ImageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 200px;
+  padding-bottom: 8px;
   
   img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 `
 
@@ -45,26 +68,13 @@ const CardBody = styled.div`
   h3 {
     padding-left: 10px;
   }
-  
-  &:hover button {
-    opacity: 1;
-    transition: opacity ease-in-out 0.3s;
-  }
-  
-  button {
-    opacity: 0;
-  }
-
-  button:hover {
-    opacity: 0.3;
-  }
 `
 
 const ButtonGroup = styled.div`
   display: flex;
   align-items: start;
   height: 100%;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
 `
 
