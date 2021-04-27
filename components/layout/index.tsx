@@ -1,6 +1,14 @@
 import Header from "../header";
 import Sidebar from "../sidebar";
-import styles from "./styles.module.scss"
+import styled from "styled-components";
+
+const Container = styled.div`
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`
 
 function Layout(props) {
   const {
@@ -8,12 +16,12 @@ function Layout(props) {
   } = props;
 
   return (
-    <div className={styles.layout}>
+    <Container>
       <Header />
       <Sidebar>
         {children}
       </Sidebar>
-    </div>
+    </Container>
   )
 }
 

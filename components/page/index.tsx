@@ -1,10 +1,55 @@
 import Head from "next/head";
-import styles from "./styles.module.scss"
+import styled from "styled-components";
 
 interface PageProps {
   title: string,
   children?: any
 }
+
+const Container = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  background-color: #ececec;
+  overflow: auto;
+  overflow-x: hidden;
+  height: 100vh;
+  padding-bottom: 30px;
+
+  h1 {
+    font-size: 20px;
+    padding-left: 10px;
+  }
+
+  .main {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 40px;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border-top-left-radius: 8px;
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: max-content;
+    min-height: 30px;
+    background-color: white;
+    color: rgb(111, 111, 111);
+    opacity: 0.8;
+
+    img {
+      padding-left: 8px;
+    }
+  }
+`
 
 function Page(props: PageProps) {
   const {
@@ -13,21 +58,21 @@ function Page(props: PageProps) {
   } = props;
   return (
     <>
-      <div className={styles.page}>
+      <Container>
         <Head>
           <title>{title}</title>
         </Head>
 
-        <main className={styles.main}>
-          <h1 className={styles.h1}>{title}</h1>
+        <main className="main">
+          <h1>{title}</h1>
           {children}
         </main>
 
-        <footer className={styles.footer}>
+        <footer>
           <span>2021 © iMachine</span>
           <a href="https://www.techplus.com.br"><img src="/img/icon-techplus.svg" alt="Logo" height={20}/> Techplus</a>
         </footer>
-      </div>
+      </Container>
     </>
   )
 }

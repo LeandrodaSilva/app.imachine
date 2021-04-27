@@ -85,7 +85,7 @@ const LearningButton = styled(Button)`
   color: white;
 `;
 
-function Home(props) {
+function Index() {
   return (
     <Layout>
       <Page title="Dashboard">
@@ -128,4 +128,4 @@ function Home(props) {
   )
 }
 
-export default Home
+export default Index

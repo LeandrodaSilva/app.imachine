@@ -1,9 +1,47 @@
-import style from "./styles.module.scss"
+import styled from "styled-components";
 
 interface CardProps {
   title?: string,
   children?: any
 }
+
+const Container = styled.div`
+  display: inline-grid;
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.30), 0 1px 1px rgba(0,0,0,0.22);
+
+  &:hover {
+    box-shadow: 0 5px 5px rgba(0,0,0,0.30), 0 5px 5px rgba(0,0,0,0.22);
+  }
+
+  .body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    width: auto;
+  }
+`
+
+const Header = styled.div`
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+`
+
+const Body = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+  width: auto;
+`
 
 function Card(props: CardProps) {
   const {
@@ -13,17 +51,17 @@ function Card(props: CardProps) {
 
   return (
     <>
-      <div className={style.card}>
+      <Container>
         {
           title &&
-          <div className={style.header}>
+          <Header>
             <span>{title}</span>
-          </div>
+          </Header>
         }
-        <div className={style.body}>
+        <Body>
           {children}
-        </div>
-      </div>
+        </Body>
+      </Container>
     </>
   )
 }
