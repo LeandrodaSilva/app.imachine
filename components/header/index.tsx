@@ -40,7 +40,7 @@ const Container = styled.header`
     }
 
     &:first-letter {
-      color: #ff0000;
+      color: deepskyblue;
       font-weight: bold;
     }
   }

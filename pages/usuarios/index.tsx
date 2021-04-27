@@ -4,7 +4,7 @@ import Layout from "../../components/layout";
 function Settings(props) {
   return (
     <Layout>
-      <Page title="Configurações">
+      <Page title="Configuração de Usuários">
       </Page>
     </Layout>
   )

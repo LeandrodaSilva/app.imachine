@@ -1,27 +1,41 @@
 import Link from "next/link";
-import {
-  BarChartTwoTone, Build,
-  BusinessTwoTone,
-  Explore, LocalConvenienceStoreTwoTone,
-  LocationCity,
-  SettingsTwoTone,
-  SpeedTwoTone
-} from "@material-ui/icons";
+import {BusinessTwoTone, HomeTwoTone, PersonTwoTone} from "@material-ui/icons";
+import styled from "styled-components";
 
+const Item = styled.li`
+  display: flex;
+  align-items: start;
+  justify-content: flex-start;
+  width: 100%;
+  border-radius: 4px;
+  padding: 10px 4px;
+  color: #343952;
 
-function Menu(props) {
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(54, 59, 88, 0.1);
+    color: black;
+  }
+`
+
+const Icon = styled.div`
+  margin-right: 5px;
+`
+
+function Menu() {
   return (
-    <div >
+    <div>
       <nav className="menu">
         <ol className="list">
-          <Link href="/"><li className="item"><SpeedTwoTone /> <span>Dashboard</span></li></Link>
-          <Link href="/empresas"><li className="item"><BusinessTwoTone /> <span>Empresas</span></li></Link>
-          <Link href="/unidades"><li className="item"><LocationCity /> <span>Unidades</span></li></Link>
-          <Link href="/areas"><li className="item"><Explore /> <span>Áreas</span></li></Link>
-          <Link href="/equipamentos"><li className="item"><Build /> <span>Equipamentos</span></li></Link>
-          <Link href="/locais"><li className="item"><LocalConvenienceStoreTwoTone /> <span>Locais</span></li></Link>
-          <Link href="/sensores"><li className="item"><BarChartTwoTone /> <span>Gráfico dos sensores</span></li></Link>
-          <Link href="/configuracoes"><li className="item"><SettingsTwoTone /> <span>Configurações do sistema</span></li></Link>
+          <Link href="/">
+            <Item className="item"><Icon><HomeTwoTone/></Icon> <span>Dashboard</span></Item>
+          </Link>
+          <Link href="/organizacao">
+            <Item className="item"><Icon><BusinessTwoTone/></Icon> <span>Organização</span></Item>
+          </Link>
+          <Link href="/usuarios">
+            <Item className="item"><Icon><PersonTwoTone/></Icon> <span>Usuários</span></Item>
+          </Link>
         </ol>
       </nav>
     </div>

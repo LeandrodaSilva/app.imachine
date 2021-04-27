@@ -31,14 +31,12 @@ export default class MyDocument extends Document {
     return (
       <Html lang="pt-br">
         <Head>
-          <link rel="manifest" href="/manifest.json" />
           <meta name="theme-color" content="#000000"/>
           <link rel="icon" href="/favicon.ico" />
           <meta
             name="description"
-            content="Leandro da Silva website"
+            content="iMachine website"
           />
-          <link rel="apple-touch-icon" href="/images/icons/maskable_icon_x192.png"/>
           <meta name="og:title" content="iMachine" />
           <meta name="twitter:card" content="summary_large_image" />
         </Head>
