@@ -2,12 +2,15 @@ import {ExitToAppTwoTone, MenuTwoTone} from "@material-ui/icons";
 import {Button} from "react-bootstrap";
 import {toggleMenu} from "../../redux/actions/menuActions";
 import {connect} from "react-redux";
-import {MouseEventHandler} from "react";
+import {MouseEventHandler, useEffect, useState} from "react";
 import Link from "next/link"
 import {useRouter} from "next/router";
 import styled from "styled-components";
+import {User} from "../../redux/actions/userActions";
+import Imachine from "../../services/imachine";
 
 interface HeaderTypes {
+  user: User,
   isOpen: boolean,
   toggleMenu: MouseEventHandler,
 }
@@ -58,9 +61,21 @@ const Container = styled.header`
 
 function Header(props: HeaderTypes) {
   const {
+    user,
     toggleMenu
   } = props;
   const router = useRouter();
+
+  const doLogout = evt => {
+    evt.preventDefault();
+
+    Imachine.logout()
+      .then(resp => {
+        localStorage.removeItem('session')
+        router.push('/login')
+      })
+      .catch(error => console.error(error));
+  }
 
   return (
     <Container>
@@ -72,9 +87,10 @@ function Header(props: HeaderTypes) {
       </div>
 
       <div className="flex">
+        {user && <div>{user.user}</div>}
         <Button className="menuButton"
                 variant="outline-light"
-                onClick={event => router.push('/login')}>
+                onClick={doLogout}>
           <ExitToAppTwoTone />
         </Button>
       </div>
@@ -83,7 +99,8 @@ function Header(props: HeaderTypes) {
 }
 
 const mapStateToProps = state => ({
-  isOpen: state.menu.isOpen
+  user: state.user.user,
+  isOpen: state.menu.isOpen,
 });
 
 const mapDispatchToProps = {

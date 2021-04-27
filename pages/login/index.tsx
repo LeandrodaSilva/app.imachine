@@ -1,38 +1,44 @@
-import {useRouter} from "next/router";
 import styles from "./styles.module.scss";
-import {
-  Button,
-  FormControl,
-  IconButton,
-  Input,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField
-} from "@material-ui/core";
+import {Button, InputLabel, OutlinedInput} from "@material-ui/core";
 import {useState} from "react";
-import {AccountBox, Visibility, VisibilityOff} from "@material-ui/icons";
+import Imachine from "../../services/imachine";
+import {connect} from "react-redux";
+import {setUser, User} from "../../redux/actions/userActions";
+import {useRouter} from "next/router";
 
-function Login(props) {
-  const router = useRouter()
+interface LoginProps {
+  user: User,
+  setUser: Function
+}
+
+function Login(props: LoginProps) {
+  const {
+    user,
+    setUser
+  } = props;
   const [values, setValues] = useState({
-    amount: '',
+    email: '',
     password: '',
-    weight: '',
-    weightRange: '',
-    showPassword: false,
   });
+  const router = useRouter();
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+  const doLogin = evt => {
+    evt.preventDefault()
+
+    Imachine.login(values.email, values.password)
+      .then(resp => {
+        const loggedUser = resp?.data?.results[0]?.data[0];
+        setUser(loggedUser);
+        localStorage.setItem('session', loggedUser.access_token);
+        localStorage.setItem('user', JSON.stringify(loggedUser));
+        router.push('/')
+      })
+      .catch(resp => console.error(resp))
+  }
 
   return (
     <>
@@ -53,9 +59,9 @@ function Login(props) {
                 <OutlinedInput
                   fullWidth
                   id="outlined-adornment"
-                  type="text"
-                  value="Lycra"
-                  onChange={handleChange('password')}
+                  type="email"
+                  value={values.email}
+                  onChange={handleChange('email')}
                 />
               </div>
 
@@ -64,7 +70,7 @@ function Login(props) {
                 <OutlinedInput
                   fullWidth
                   id="outlined-adornment-password"
-                  type={values.showPassword ? 'text' : 'password'}
+                  type="password"
                   value={values.password}
                   onChange={handleChange('password')}
                 />
@@ -72,7 +78,7 @@ function Login(props) {
             </fieldset>
 
             <Button style={{backgroundColor: "#272B41", color: "white"}}
-                    onClick={event => router.push("/")}>Logar</Button>
+                    onClick={doLogin}>Logar</Button>
           </form>
         </div>
       </div>
@@ -80,4 +86,12 @@ function Login(props) {
   )
 }
 
-export default Login
+const mapStateToProps = state => ({
+  user: state.user.user
+});
+
+const mapDispatchToProps = {
+  setUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
