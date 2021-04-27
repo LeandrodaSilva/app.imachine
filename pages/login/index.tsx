@@ -5,11 +5,17 @@ import Imachine from "../../services/imachine";
 import {connect} from "react-redux";
 import {setUser, User} from "../../redux/actions/userActions";
 import {useRouter} from "next/router";
+import styled from "styled-components";
 
 interface LoginProps {
   user: User,
   setUser: Function
 }
+
+const Error = styled.div`
+  color: red;
+  padding-bottom: 10px;
+`
 
 function Login(props: LoginProps) {
   const {
@@ -21,23 +27,43 @@ function Login(props: LoginProps) {
     password: '',
   });
   const router = useRouter();
+  const [errors, setErrors] = useState(undefined);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
-  const doLogin = evt => {
+  const doLogin = async evt => {
     evt.preventDefault()
 
-    Imachine.login(values.email, values.password)
-      .then(resp => {
+    if (!values.email) {
+      setErrors({message: "Campo de e-mail obrigatório"})
+      return;
+    }
+
+    if (!values.password) {
+      setErrors({message: "Campo de senha obrigatório"})
+      return;
+    }
+
+    try {
+      const resp = await Imachine.login(values.email, values.password)
+
+      if (resp.status === 200) {
         const loggedUser = resp?.data?.results[0]?.data[0];
         setUser(loggedUser);
         localStorage.setItem('session', loggedUser.access_token);
         localStorage.setItem('user', JSON.stringify(loggedUser));
         router.push('/')
-      })
-      .catch(resp => console.error(resp))
+      } else if(resp.status === 401) {
+        setErrors({message: "Usuário não autorizado"})
+      } else {
+        setErrors(resp)
+        console.log('Erro ---- ', errors)
+      }
+    } catch (e) {
+      setErrors({message: "Usuário não autorizado"})
+    }
   }
 
   return (
@@ -61,6 +87,7 @@ function Login(props: LoginProps) {
                   id="outlined-adornment"
                   type="email"
                   value={values.email}
+                  required
                   onChange={handleChange('email')}
                 />
               </div>
@@ -72,10 +99,13 @@ function Login(props: LoginProps) {
                   id="outlined-adornment-password"
                   type="password"
                   value={values.password}
+                  required
                   onChange={handleChange('password')}
                 />
               </div>
             </fieldset>
+
+            {errors && <Error><span>{errors.message}</span></Error>}
 
             <Button style={{backgroundColor: "#272B41", color: "white"}}
                     onClick={doLogin}>Logar</Button>
