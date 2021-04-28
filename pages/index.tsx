@@ -1,131 +1,122 @@
 import Layout from "../components/layout";
 import Page from "../components/page";
-import Card from "../components/card";
 import styled from "styled-components";
-import dynamic from 'next/dynamic'
-const Pie = dynamic(() => import("../components/charts/pie"), {ssr:false})
-const Table = dynamic(() => import("../components/table"), {ssr:false})
+import {setUser} from "../redux/actions/userActions";
+import {connect} from "react-redux";
+import {User} from "../types";
+import SidebarRight from "../components/sidebarRight";
+import {openMenu} from "../redux/actions/sidebarRightActions";
 
 const Row = styled.div`
   display: flex;
-  flex-wrap: wrap;
-`
-
-const GeneralPrevision = styled.div`
-  flex: 1;
-  width: 100%;
-  padding: 10px;
-  height: 100%;
-`
-
-const TableContainer = styled.div`
-  flex: 2;
-  width: 100%;
-  padding: 10px;
-`
-
-const Prevision = styled.div`
-  flex: 4;
-  width: 100%;
-  padding: 10px;
-`
-
-const Legend = styled.div`
-  flex: 1;
-  width: 100%;
-  padding: 10px;
-`
-
-const LegendItens = styled.div`
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
   width: 100%;
-  padding: 4px;
-  height: 100%;
 `
 
 const Content = styled.div`
   height: auto;
-  //overflow: auto;
   display: block;
 `
 
-const Button = styled.button`
-  padding: 2px;
-  margin: 2px;
-  border: none;
-  border-radius: 4px;
-  width: 100%;
-  height: 100%;
-  
-  &:hover {
-    opacity: 0.6;
+const WarningsContainer = styled.div`
+  width: available;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+
+  h3, button {
+    font-size: 16px;
+  }
+
+  button {
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.11);
+    background-color: transparent;
+    color: rgba(91, 91, 91, 0.83);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.22);
+      border: 1px solid #0053ff;
+    }
   }
 `
 
-const FailButton = styled(Button)`
-  background-color: tomato;
-  color: white;
-`;
 
-const AlertButton = styled(Button)`
-  background-color: #ffe047;
-  color: white;
-`;
+const WarningsList = styled.ul`
+  list-style: none;
+  width: available;
+  padding: 0;
 
-const NormalButton = styled(Button)`
-  background-color: #4cff00;
-  color: white;
-`;
+  li {
+    width: available;
+  }
 
-const LearningButton = styled(Button)`
-  background-color: #00fff7;
-  color: white;
-`;
+  li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(189, 189, 189, 0.49);
+    padding-bottom: 4px;
+    width: available;
 
-function Index() {
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.22);
+      border-radius: 4px;
+      border-bottom: 1px solid #0053ff;
+      opacity: 0.8;
+    }
+  }
+`
+
+function Index(props: {
+  user: User,
+  openMenu: Function
+}) {
+  const {
+    user,
+    openMenu
+  } = props;
   return (
-    <Layout>
-      <Page title="Dashboard">
-        <Content>
-          <Row>
-            <GeneralPrevision>
-              <Card title="Previsão Geral">
-                <Pie />
-              </Card>
-            </GeneralPrevision>
+    <>
+      <Layout>
+        <Page title={user.company.company_name}>
+          <Content>
+            <Row>
+              <WarningsContainer>
+                <h3>Avisos</h3>
+                <button>configurar</button>
+              </WarningsContainer>
 
-            <TableContainer>
-              <Card>
-                <Table />
-              </Card>
-            </TableContainer>
-          </Row>
-
-          <Row>
-            <Legend>
-              <Card>
-                <LegendItens>
-                  <FailButton>FALHAS</FailButton>
-                  <AlertButton>ALERTAS</AlertButton>
-                  <NormalButton>NORMAIS</NormalButton>
-                  <LearningButton>APRENDIZADO</LearningButton>
-                </LegendItens>
-              </Card>
-            </Legend>
-
-            <Prevision>
-              <Card title="Previsão de Paulinia">
-                <Pie />
-              </Card>
-            </Prevision>
-          </Row>
-        </Content>
-      </Page>
-    </Layout>
+              <WarningsList>
+                <li onClick={() => openMenu()}>
+                  <a>
+                    <span>Soprador</span>
+                    <span>São Paulo</span>
+                    <span>Setor 1</span>
+                    <span>2%</span>
+                  </a>
+                </li>
+              </WarningsList>
+            </Row>
+          </Content>
+        </Page>
+      </Layout>
+      <SidebarRight>
+      </SidebarRight>
+    </>
   )
 }
 
-export default Index
+const mapStateToProps = state => ({
+  user: state.user.user
+});
+
+const mapDispatchToProps = {
+  setUser,
+  openMenu: openMenu
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index);

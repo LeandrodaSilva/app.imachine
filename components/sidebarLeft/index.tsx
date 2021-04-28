@@ -1,4 +1,3 @@
-import styles from "./styles.module.scss"
 import Menu from "./menu";
 import {closeMenu} from "../../redux/actions/menuActions";
 import {connect} from "react-redux";

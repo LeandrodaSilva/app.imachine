@@ -6,8 +6,8 @@ import {MouseEventHandler, useEffect, useState} from "react";
 import Link from "next/link"
 import {useRouter} from "next/router";
 import styled from "styled-components";
-import {User} from "../../redux/actions/userActions";
 import Imachine from "../../services/imachine";
+import {User} from "../../types";
 
 interface HeaderTypes {
   user: User,

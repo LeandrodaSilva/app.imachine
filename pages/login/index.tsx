@@ -3,9 +3,10 @@ import {Button, InputLabel, OutlinedInput} from "@material-ui/core";
 import {useState} from "react";
 import Imachine from "../../services/imachine";
 import {connect} from "react-redux";
-import {setUser, User} from "../../redux/actions/userActions";
+import {setUser} from "../../redux/actions/userActions";
 import {useRouter} from "next/router";
 import styled from "styled-components";
+import {User} from "../../types";
 
 interface LoginProps {
   user: User,
@@ -48,7 +49,7 @@ function Login(props: LoginProps) {
 
     try {
       const resp = await Imachine.login(values.email, values.password)
-
+      console.log(resp)
       if (resp.status === 200) {
         const loggedUser = resp?.data?.results[0]?.data[0];
         setUser(loggedUser);

@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-const URL = "http://vmi173836.contaboserver.net:5000";
+const URL = process.env.NEXT_PUBLIC_SERVICE_IMACHINE_URL || "";
 
 function login(email: string, password: string): Promise<AxiosResponse<any>> {
   return axios.post(`${URL}/resources/users/login`, {

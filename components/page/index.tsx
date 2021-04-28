@@ -12,15 +12,18 @@ const Container = styled.div`
   justify-content: space-between;
   flex-direction: row;
   width: 100%;
-  background-color: #ececec;
+  background-color: #f5f5f5;
   overflow: auto;
   overflow-x: hidden;
   height: 100vh;
   padding-bottom: 30px;
+  padding-left: 10%;
+  padding-right: 10%;
 
   h1 {
-    font-size: 20px;
-    padding-left: 10px;
+    font-size: 28px;
+    padding-bottom: 20px;
+    padding-top: 50px;
   }
 
   .main {

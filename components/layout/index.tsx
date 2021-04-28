@@ -1,5 +1,5 @@
 import Header from "../header";
-import Sidebar from "../sidebar";
+import Sidebar from "../sidebarLeft";
 import styled from "styled-components";
 
 const Container = styled.div`
