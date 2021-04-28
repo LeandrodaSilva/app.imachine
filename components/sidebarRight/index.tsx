@@ -27,6 +27,8 @@ const Container = styled.div`
 
   form {
     transition: all ease-in-out 0.5s;
+    -webkit-transition: all ease-in-out 0.5s;
+    -moz-transition: all ease-in-out 0.5s;
     display: flex;
     position: absolute;
     right: -30vw;
