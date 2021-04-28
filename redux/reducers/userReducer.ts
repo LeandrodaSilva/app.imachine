@@ -1,6 +1,7 @@
 import {AnyAction} from "redux";
-import {SET_USER, User} from "../actions/userActions";
+import {SET_USER} from "../actions/userActions";
 import {defineState} from 'redux-localstore'
+import {User} from "../../types";
 
 export interface UserState {
   user: User,
