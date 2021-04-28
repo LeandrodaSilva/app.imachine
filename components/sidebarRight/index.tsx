@@ -10,11 +10,8 @@ const Container = styled.div`
   width: 30vw;
   background-color: transparent;
   height: 100vh;
-  transition: opacity ease-in-out 0.5s;
-  opacity: 0;
 
   &.open {
-    opacity: 1;
     form {
       right: 0;
       transform: translate(-0vw, 0);
