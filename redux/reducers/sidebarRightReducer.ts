@@ -6,7 +6,7 @@ export interface SidebarRightState {
 }
 
 const sidebarRightReducer = (state: SidebarRightState = {
-  isOpen: true
+  isOpen: false
 }, action: AnyAction) => {
   switch (action.type) {
     case CLOSE_MENU:
