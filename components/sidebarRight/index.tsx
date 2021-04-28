@@ -7,32 +7,34 @@ const Container = styled.div`
   position: absolute;
   right: 0;
   top: 0;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.45);
+  width: 30vw;
+  background-color: transparent;
   height: 100vh;
 
   &.open {
     form {
-      width: 30vw;
-      transition: width ease-in 1s;
+      right: 0;
+      transform: translate(-0vw, 0);
     }
   }
 
   &.close {
     form {
-      width: 0;
-      transition: width ease-in .4s;
+      right: -30vw;
+      transform: translate(30vw, 0);
     }
   }
 
   form {
+    transition: all ease-in-out 0.5s;
     display: flex;
     position: absolute;
-    right: 0;
+    right: -30vw;
     top: 0;
     background-color: rgb(39, 43, 65);
     height: 100vh;
     color: white;
+    width: 30vw;
 
     > button {
       position: absolute;
@@ -80,6 +82,17 @@ const Container = styled.div`
   }
 `
 
+const Dimmer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+`
+
+
 const Form = styled.form`
   
 `
@@ -92,10 +105,10 @@ function SidebarRight(props) {
   } = props;
 
   return (
-    isOpen &&
     <Container onClick={closeMenu} className={isOpen ? "open" : "close"}>
+      {isOpen && <Dimmer onClick={closeMenu}/>}
       <Form>
-        <button onClick={closeMenu}>x</button>
+        <button type="button" onClick={closeMenu}>x</button>
         <div className="children">
           {children}
         </div>
