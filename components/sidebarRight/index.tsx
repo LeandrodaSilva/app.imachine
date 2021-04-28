@@ -19,7 +19,6 @@ const Container = styled.div`
   }
 
   &.close {
-    transform: translate(30vw, 0);
     form {
       right: -30vw;
       transform: translate(30vw, 0);
