@@ -6,6 +6,8 @@ import {connect} from "react-redux";
 import {User} from "../types";
 import SidebarRight from "../components/sidebarRight";
 import {openMenu} from "../redux/actions/sidebarRightActions";
+import Card from "../components/card";
+import {FiberManualRecordTwoTone, WarningTwoTone} from "@material-ui/icons";
 
 const Row = styled.div`
   display: flex;
@@ -71,6 +73,31 @@ const WarningsList = styled.ul`
   }
 `
 
+const Table = styled.table`
+  width: 100%;
+  padding-left: 10px;
+  min-height: 100px;
+
+  tr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(189, 189, 189, 0.49);
+    width: available;
+    padding: 4px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(180, 180, 180, 0.2);
+      opacity: 0.8;
+    }
+  }
+`
+
+const Dot = styled.span`
+  padding-right: 10px;
+`
+
 function Index(props: {
   user: User,
   openMenu: Function
@@ -85,21 +112,54 @@ function Index(props: {
         <Page title={user.company.company_name}>
           <Content>
             <Row>
-              <WarningsContainer>
-                <h3>Avisos</h3>
-                <button>configurar</button>
-              </WarningsContainer>
-
-              <WarningsList>
-                <li onClick={() => openMenu()}>
-                  <a>
-                    <span>Soprador</span>
-                    <span>São Paulo</span>
-                    <span>Setor 1</span>
-                    <span>2%</span>
-                  </a>
-                </li>
-              </WarningsList>
+              <Card title="Avisos">
+                <Table>
+                  <thead>
+                  </thead>
+                  <tbody>
+                  <tr onClick={() => openMenu()}>
+                    <td>
+                      <Dot>
+                        <FiberManualRecordTwoTone color={"error"} fontSize={"inherit"}/>
+                      </Dot>
+                      <WarningTwoTone color={"error"} />  Soprador</td>
+                    <td>São Paulo</td>
+                    <td>Setor 1</td>
+                    <td style={{color: "red", fontWeight: "bold"}}>2%</td>
+                  </tr>
+                  <tr onClick={() => openMenu()}>
+                    <td>
+                      <Dot>
+                        <FiberManualRecordTwoTone color={"error"} fontSize={"inherit"}/>
+                      </Dot>
+                      <WarningTwoTone color={"error"} />  Soprador</td>
+                    <td>São Paulo</td>
+                    <td>Setor 2</td>
+                    <td style={{color: "red", fontWeight: "bold"}}>5%</td>
+                  </tr>
+                  <tr onClick={() => openMenu()}>
+                    <td>
+                      <Dot>
+                        <FiberManualRecordTwoTone color={"error"} fontSize={"inherit"}/>
+                      </Dot>
+                      <WarningTwoTone color={"error"} />  Soprador</td>
+                    <td>São Paulo</td>
+                    <td>Setor 3</td>
+                    <td style={{color: "red", fontWeight: "bold"}}>1%</td>
+                  </tr>
+                  <tr onClick={() => openMenu()}>
+                    <td>
+                      <Dot>
+                        <FiberManualRecordTwoTone color={"error"} fontSize={"inherit"}/>
+                      </Dot>
+                      <WarningTwoTone color={"error"} />  Soprador</td>
+                    <td>São Paulo</td>
+                    <td>Setor 4</td>
+                    <td style={{color: "red", fontWeight: "bold"}}>4%</td>
+                  </tr>
+                  </tbody>
+                </Table>
+              </Card>
             </Row>
           </Content>
         </Page>

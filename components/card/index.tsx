@@ -11,7 +11,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 8px;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.30), 0 1px 1px rgba(0,0,0,0.22);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.10), 0 1px 1px rgba(0,0,0,0.12);
 
   &:hover {
     box-shadow: 0 5px 5px rgba(0,0,0,0.30), 0 5px 5px rgba(0,0,0,0.22);
@@ -27,12 +27,13 @@ const Container = styled.div`
 `
 
 const Header = styled.div`
-  padding: 6px;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+  font-size: 16px;
 `
 
 const Body = styled.div`

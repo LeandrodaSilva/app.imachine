@@ -15,15 +15,15 @@ const Container = styled.div`
   background-color: #f5f5f5;
   overflow: auto;
   overflow-x: hidden;
-  height: 100vh;
+  height: 100%;
   padding-bottom: 30px;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 20px;
+  padding-right: 20px;
 
   h1 {
     font-size: 28px;
     padding-bottom: 20px;
-    padding-top: 50px;
+    padding-top: 30px;
   }
 
   .main {

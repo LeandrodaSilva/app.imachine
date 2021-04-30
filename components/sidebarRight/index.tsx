@@ -7,9 +7,10 @@ const Container = styled.div`
   position: absolute;
   right: 0;
   top: 0;
-  width: 30vw;
+  width: 300px;
   background-color: transparent;
-  height: 100vh;
+  height: 100%;
+  min-height: 100%;
 
   &.open {
     form {
@@ -19,9 +20,9 @@ const Container = styled.div`
   }
 
   &.close {
-    right: -30vw;
+    right: -300px;
     form {
-      right: -30vw;
+      right: -300px;
       transform: translate(30vw, 0);
     }
   }
@@ -32,10 +33,10 @@ const Container = styled.div`
     -moz-transition: all ease-in-out 0.5s;
     display: flex;
     position: absolute;
-    right: -30vw;
+    right: -300px;
     top: 0;
     background-color: rgb(39, 43, 65);
-    height: 100vh;
+    height: 100%;
     color: white;
     width: 30vw;
 
@@ -87,7 +88,7 @@ const Container = styled.div`
 
 const Dimmer = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: block;
   position: absolute;
   top: 0;
