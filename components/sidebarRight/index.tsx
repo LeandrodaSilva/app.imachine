@@ -1,6 +1,7 @@
 import {closeMenu} from "../../redux/actions/sidebarRightActions";
 import {connect} from "react-redux";
 import styled from "styled-components";
+import {CloseTwoTone} from "@material-ui/icons";
 
 const Container = styled.div`
   display: flex;
@@ -21,10 +22,16 @@ const Container = styled.div`
     max-width: 100%;
     
     form {
-      width: 300px;
-      min-width: 300px;
-      max-width: 300px;
+      z-index: 1052;
+      width: 400px;
+      min-width: 400px;
+      max-width: 400px;
       transform: translate(-0, 0);
+      
+      > button {
+        transform: rotate(0deg);
+        transition: all ease-in-out 0.5s;
+      }
     }
   }
 
@@ -62,6 +69,8 @@ const Container = styled.div`
       color: rgba(255, 255, 255, 0.64);
       background-color: transparent;
       border: none;
+      transform: rotate(45deg);
+      transition: all ease-in-out 0.5s;
     }
 
     .children {
@@ -109,6 +118,7 @@ const Dimmer = styled.div`
   top: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.35);
+  z-index: 1051;
 `
 
 
@@ -127,7 +137,7 @@ function SidebarRight(props) {
     <Container onClick={closeMenu} className={isOpen ? "open" : "close"}>
       {isOpen && <Dimmer onClick={closeMenu}/>}
       <Form>
-        <button type="button" onClick={closeMenu}>x</button>
+        <button type="button" onClick={closeMenu}><CloseTwoTone/></button>
         <div className="children">
           {children}
         </div>
