@@ -12,13 +12,14 @@ const Container = styled.div`
   justify-content: space-between;
   flex-direction: row;
   width: 100%;
-  background-color: #f5f5f5;
   overflow: auto;
   overflow-x: hidden;
   height: 100%;
-  padding-bottom: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 50px 20px 30px 320px;
+
+  @media only screen and (max-width: 600px) {
+    padding: 50px 20px 30px 20px;
+  }
 
   h1 {
     font-size: 28px;

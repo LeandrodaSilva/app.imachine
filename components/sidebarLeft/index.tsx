@@ -1,65 +1,76 @@
-import Menu from "./menu";
 import {closeMenu} from "../../redux/actions/menuActions";
 import {connect} from "react-redux";
 import styled from "styled-components";
+import Link from "next/link";
+import {BusinessTwoTone, HomeTwoTone, PersonTwoTone} from "@material-ui/icons";
 
 const Container = styled.div`
   display: flex;
   position: fixed;
   left: 0;
   top: 50px;
-  width: 100%;
+  width: 300px;
   height: 100%;
-  background-color: #282c41;    
+  background-color: #282c41;
+  z-index: 1050;
+  overflow: hidden;
 
-  .children {
-    overflow-y: scroll;
-    width: 100%;
-  }
-
-  .open {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    color: black;
-    width: 280px;
-    max-width: 280px;
-    min-width: 280px;
-    height: 100%;
-    padding: 15px 15px 55px;
-    transition: width ease .1s;
-    z-index: 998;
-  }
-
-  .close {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    //background-color: #272B41;
-    color: black;
+  @media only screen and (max-width: 600px) {
     width: 0;
-    padding: 0;
-    transition: width ease-out .1s;
-    .menu {
-      .list {
-        .item {
-          justify-content: center;
 
-          svg {
-            margin-right: 0;
-            width: 100%;
-          }
+    &.block {
+      width: 300px;
 
-          span {
-            display: none;
+      .menu {
+        display: block;
+        left: 0;
+        top: 0;
+        position: absolute;
+      }
+    }
+
+    .open {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      color: black;
+      width: 280px;
+      max-width: 280px;
+      min-width: 280px;
+      height: 100%;
+      padding: 15px 15px 55px;
+      transition: width ease .1s;
+      z-index: 998;
+    }
+
+    .close {
+      .menu {
+        .list {
+          .item {
+            justify-content: center;
+
+            svg {
+              margin-right: 0;
+              width: 100%;
+            }
+
+            span {
+              display: none;
+            }
           }
         }
       }
     }
   }
 
+  .children {
+    overflow-y: scroll;
+    width: 100%;
+  }
+
   .menu {
     width: 100%;
+
     .list {
       list-style: none;
       width: 100%;
@@ -68,21 +79,75 @@ const Container = styled.div`
   }
 `
 
+const Item = styled.li`
+  display: flex;
+  align-items: center;
+  -webkit-box-align: center;
+  justify-content: flex-start;
+  width: 100%;
+  border-radius: 4px;
+  font-size: 14px;
+  color: hsla(0, 0%, 100%, .65) !important;
+  transition: background-color ease-out 0.5s;
+  padding: 0 30px;
+  color: #343952;
+  height: 40px;
+
+  svg {
+    margin-right: 15px;
+    font-size: 14px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(184, 187, 205, 0.1);
+  }
+`
+
+const Icon = styled.div`
+  margin-right: 5px;
+`
+
+const Dimmer = styled.div`
+  width: 100vw;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+  z-index: 999;
+`
+
 function Sidebar(props) {
   const {
     isOpen,
-    children
+    children,
+    closeMenu,
   } = props;
 
   return (
-    <Container>
-      <div className={isOpen ? "open" : "close"}>
-        <Menu />
-      </div>
+    <>
+      <Container className={isOpen ? "block" : ""}>
+        <nav className="menu">
+          <ol className="list">
+            <Link href="/">
+              <Item className="item"><Icon><HomeTwoTone/></Icon> <span>Dashboard</span></Item>
+            </Link>
+            <Link href="/organizacao">
+              <Item className="item"><Icon><BusinessTwoTone/></Icon> <span>Organização</span></Item>
+            </Link>
+            <Link href="/usuarios">
+              <Item className="item"><Icon><PersonTwoTone/></Icon> <span>Usuários</span></Item>
+            </Link>
+          </ol>
+        </nav>
+      </Container>
+      {isOpen && <Dimmer onClick={closeMenu}/>}
       <div className="children">
         {children}
       </div>
-    </Container>
+    </>
   )
 }
 

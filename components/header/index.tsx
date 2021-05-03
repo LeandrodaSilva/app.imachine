@@ -1,13 +1,12 @@
-import {ExitToAppTwoTone, MenuTwoTone} from "@material-ui/icons";
+import {MenuTwoTone} from "@material-ui/icons";
 import {Button} from "react-bootstrap";
 import {toggleMenu} from "../../redux/actions/menuActions";
 import {connect} from "react-redux";
-import {MouseEventHandler, useEffect, useState} from "react";
+import {MouseEventHandler} from "react";
 import Link from "next/link"
-import {useRouter} from "next/router";
 import styled from "styled-components";
-import Imachine from "../../services/imachine";
 import {User} from "../../types";
+import HeaderUserBox from "../headerUserBox";
 
 interface HeaderTypes {
   user: User,
@@ -28,6 +27,12 @@ const Container = styled.header`
   padding-right: 10px;
   padding-left: 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  @media only screen and (min-width: 600px) {
+    .menuButton {
+      display: none;
+    }
+  }
 
   .flex {
     display: flex;
@@ -57,6 +62,33 @@ const Container = styled.header`
       color: white;
     }
   }
+
+  .userButton {
+    border: none;
+    margin-right: 4px;
+    background-color: #ffffff;
+    color: #000000;
+    width: 100%;
+
+    &:hover {
+      background-color: rgba(52, 57, 82, 0.4);
+      color: #000000;
+    }
+  }
+`
+
+const NavRight = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+`
+
+const NavLeft = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 `
 
 function Header(props: HeaderTypes) {
@@ -64,36 +96,19 @@ function Header(props: HeaderTypes) {
     user,
     toggleMenu
   } = props;
-  const router = useRouter();
-
-  const doLogout = evt => {
-    evt.preventDefault();
-
-    Imachine.logout()
-      .then(resp => {
-        localStorage.removeItem('session')
-        router.push('/login')
-      })
-      .catch(error => console.error(error));
-  }
 
   return (
     <Container>
-      <div className="flex">
+      <NavLeft>
         <Button className="menuButton" variant="outline-light" onClick={toggleMenu}>
           <MenuTwoTone />
         </Button>
         <Link href="/"><p className="logo">iMachine</p></Link>
-      </div>
+      </NavLeft>
 
-      <div className="flex">
-        {user && <div>{user.user}</div>}
-        <Button className="menuButton"
-                variant="outline-light"
-                onClick={doLogout}>
-          <ExitToAppTwoTone />
-        </Button>
-      </div>
+      <NavRight>
+        <HeaderUserBox />
+      </NavRight>
     </Container>
   )
 }

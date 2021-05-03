@@ -7,23 +7,36 @@ const Container = styled.div`
   position: absolute;
   right: 0;
   top: 0;
-  width: 300px;
+  width: 0;
+  min-width: 0;
+  max-width: 0;
   background-color: transparent;
   height: 100%;
   min-height: 100%;
+  overflow: hidden;
 
   &.open {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    
     form {
-      right: 0;
-      transform: translate(-0vw, 0);
+      width: 300px;
+      min-width: 300px;
+      max-width: 300px;
+      transform: translate(-0, 0);
     }
   }
 
   &.close {
-    right: -300px;
+    width: 0;
+    min-width: 0;
+    max-width: 0;
+    
     form {
-      right: -300px;
-      transform: translate(30vw, 0);
+      width: 0;
+      min-width: 0;
+      max-width: 0;
     }
   }
 
@@ -33,12 +46,14 @@ const Container = styled.div`
     -moz-transition: all ease-in-out 0.5s;
     display: flex;
     position: absolute;
-    right: -300px;
     top: 0;
     background-color: rgb(39, 43, 65);
     height: 100%;
     color: white;
-    width: 30vw;
+    width: 0;
+    right: 0;
+    min-width: 0;
+    max-width: 0;
 
     > button {
       position: absolute;
