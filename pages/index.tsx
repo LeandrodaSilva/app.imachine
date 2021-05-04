@@ -225,10 +225,11 @@ function Index(props: {
         </Page>
       </Layout>
       {
-        (mounted && selectedWarning) &&
-        <SidebarRight>
-          {renderWarningView()}
-        </SidebarRight>
+        (mounted && selectedWarning)
+        ? <SidebarRight>
+            {renderWarningView()}
+          </SidebarRight>
+        : undefined
       }
     </>
   )
