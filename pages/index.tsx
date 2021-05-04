@@ -124,7 +124,7 @@ function Index(props: {
           </div>
 
           <div className="body">
-            <Line />
+            {mounted && <Line />}
           </div>
 
           <div className="footer">
@@ -225,7 +225,7 @@ function Index(props: {
         </Page>
       </Layout>
       {
-        selectedWarning &&
+        (mounted && selectedWarning) &&
         <SidebarRight>
           {renderWarningView()}
         </SidebarRight>
