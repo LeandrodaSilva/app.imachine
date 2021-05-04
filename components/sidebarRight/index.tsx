@@ -76,6 +76,9 @@ const Container = styled.div`
     .children {
       overflow-y: scroll;
       width: 100%;
+      margin-top: 60px;
+      margin-left: 10px;
+      margin-right: 10px;
     }
 
     .menu {
@@ -147,7 +150,7 @@ function SidebarRight(props) {
 }
 
 const mapStateToProps = state => ({
-  isOpen: state.SidebarRight.isOpen
+  isOpen: state.SidebarRightComponent.isOpen
 });
 
 const mapDispatchToProps = {

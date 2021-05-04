@@ -40,8 +40,8 @@ function HeaderUserBox(props) {
 }
 
 const mapStateToProps = state => ({
-  user: state.user.user,
-  isOpen: state.menu.isOpen,
+  user: state.UserObject.user,
+  isOpen: state.SidebarLeftComponent.isOpen,
 });
 
 const mapDispatchToProps = {

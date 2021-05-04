@@ -4,9 +4,9 @@ import userReducer from "./userReducer";
 import sidebarRightReducer from "./sidebarRightReducer";
 
 const rootReducer = combineReducers({
-  menu: menuReducer,
-  user: userReducer,
-  SidebarRight: sidebarRightReducer
+  SidebarLeftComponent: menuReducer,
+  UserObject: userReducer,
+  SidebarRightComponent: sidebarRightReducer
 });
 
 export default rootReducer;

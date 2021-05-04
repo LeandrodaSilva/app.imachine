@@ -152,7 +152,7 @@ function Sidebar(props) {
 }
 
 const mapStateToProps = state => ({
-  isOpen: state.menu.isOpen
+  isOpen: state.SidebarLeftComponent.isOpen
 });
 
 const mapDispatchToProps = {

@@ -118,7 +118,7 @@ function Login(props: LoginProps) {
 }
 
 const mapStateToProps = state => ({
-  user: state.user.user
+  user: state.UserObject.user
 });
 
 const mapDispatchToProps = {

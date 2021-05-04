@@ -12,3 +12,12 @@ export interface User {
   permission_level: number,
   access_token: string,
 }
+
+export interface Warning {
+  id: number,
+  name: string,
+  color: "amarelo"|"azul"|"verde"|"vermelho",
+  factory: string,
+  sector: string,
+  timestamp: string,
+}

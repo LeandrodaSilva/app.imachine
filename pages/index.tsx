@@ -3,11 +3,15 @@ import Page from "../components/page";
 import styled from "styled-components";
 import {setUser} from "../redux/actions/userActions";
 import {connect} from "react-redux";
-import {User} from "../types";
+import {User, Warning} from "../types";
 import SidebarRight from "../components/sidebarRight";
 import {openMenu} from "../redux/actions/sidebarRightActions";
 import Card from "../components/card";
 import {FiberManualRecordTwoTone, WarningTwoTone} from "@material-ui/icons";
+import {useEffect, useState} from "react";
+import Imachine from "../services/imachine";
+import Link from "next/link";
+import Line from "../components/charts/line";
 
 const Row = styled.div`
   display: flex;
@@ -21,55 +25,54 @@ const Content = styled.div`
   display: block;
 `
 
-const WarningsContainer = styled.div`
-  width: available;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 10px;
+const WarningView = styled.div`
+  padding: 0 50px;
+`
 
-  h3, button {
-    font-size: 16px;
+const WarningViewHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 50px;
+
+  h2, span {
+    font-size: 28px;
+    font-weight: lighter;
   }
 
-  button {
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.11);
-    background-color: transparent;
-    color: rgba(91, 91, 91, 0.83);
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.22);
-      border: 1px solid #0053ff;
-    }
+  span {
+    color: red;
   }
 `
 
+const WarningViewBody = styled.div`
+ 
+`
 
-const WarningsList = styled.ul`
-  list-style: none;
-  width: available;
-  padding: 0;
-
-  li {
-    width: available;
+const WarningViewBodySensor = styled.li`
+  padding-bottom: 10px;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  li a {
+  .body {
+    height: auto;
+    border-radius: 8px;
+    background-color: #2a2e44;
+  }
+  
+  .footer {
+    padding-top: 4px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(189, 189, 189, 0.49);
-    padding-bottom: 4px;
-    width: available;
-
-    &:hover {
-      cursor: pointer;
-      background-color: rgba(255, 255, 255, 0.22);
-      border-radius: 4px;
-      border-bottom: 1px solid #0053ff;
-      opacity: 0.8;
-    }
+    justify-content: flex-end;
   }
 `
 
@@ -106,6 +109,102 @@ function Index(props: {
     user,
     openMenu
   } = props;
+  const [arrWarnings, setArrWarnings] = useState<Array<Warning>|[]>([]);
+  const [selectedWarning, setSelectedWarning] = useState<Warning|undefined>(undefined);
+  const [mounted, setMounted] = useState(false);
+
+
+  const renderWarningViewItem = () => {
+    return (
+      <WarningViewBodySensor>
+        <div>
+          <div className="header">
+            <p>Mancal dianteiro motor</p>
+            <span>80%</span>
+          </div>
+
+          <div className="body">
+            <Line />
+          </div>
+
+          <div className="footer">
+            <Link href="/#">Ver mais</Link>
+          </div>
+        </div>
+      </WarningViewBodySensor>
+    )
+  }
+
+  const renderWarningView = () => {
+    return (
+      <WarningView>
+        <WarningViewHeader>
+          <h2>{selectedWarning.name}</h2>
+          <span><WarningTwoTone color={"error"} /> 10%</span>
+        </WarningViewHeader>
+        <WarningViewBody>
+          <ol>
+            {renderWarningViewItem()}
+            {renderWarningViewItem()}
+            {renderWarningViewItem()}
+            {renderWarningViewItem()}
+            {renderWarningViewItem()}
+            {renderWarningViewItem()}
+            {renderWarningViewItem()}
+            {renderWarningViewItem()}
+          </ol>
+        </WarningViewBody>
+      </WarningView>
+    )
+  }
+
+  const renderWarnings = (warning: Warning) => {
+    let color: 'inherit' | 'primary' | 'secondary' | 'action' | 'disabled' | 'error';
+
+    switch (warning.color) {
+      case "amarelo":
+        color = "error"
+        break;
+      case "azul":
+        color = "primary"
+        break;
+      case "verde":
+        color = "action"
+        break;
+      case "vermelho":
+        color = "error"
+        break;
+    }
+
+    return (
+      <>
+        <tr onClick={() => {
+          setSelectedWarning(warning);
+          openMenu();
+        }}>
+          <td>
+            <Dot>
+              <FiberManualRecordTwoTone color={color} fontSize={"inherit"}/>
+            </Dot>
+            {' '}{warning.name}</td>
+          <td>{warning.factory}</td>
+          <td>{warning.sector}</td>
+          <td>{warning.timestamp}</td>
+        </tr>
+      </>
+    )
+  }
+
+  useEffect(() => {
+    setMounted(true);
+  }, [])
+
+  useEffect(() => {
+    if (mounted) {
+      Imachine.machine.warnings().then(value => setArrWarnings(value));
+    }
+  }, [mounted])
+
   return (
     <>
       <Layout>
@@ -117,46 +216,7 @@ function Index(props: {
                   <thead>
                   </thead>
                   <tbody>
-                  <tr onClick={() => openMenu()}>
-                    <td>
-                      <Dot>
-                        <FiberManualRecordTwoTone color={"error"} fontSize={"inherit"}/>
-                      </Dot>
-                      <WarningTwoTone color={"error"} />  Soprador</td>
-                    <td>São Paulo</td>
-                    <td>Setor 1</td>
-                    <td style={{color: "red", fontWeight: "bold"}}>2%</td>
-                  </tr>
-                  <tr onClick={() => openMenu()}>
-                    <td>
-                      <Dot>
-                        <FiberManualRecordTwoTone color={"error"} fontSize={"inherit"}/>
-                      </Dot>
-                      <WarningTwoTone color={"error"} />  Soprador</td>
-                    <td>São Paulo</td>
-                    <td>Setor 2</td>
-                    <td style={{color: "red", fontWeight: "bold"}}>5%</td>
-                  </tr>
-                  <tr onClick={() => openMenu()}>
-                    <td>
-                      <Dot>
-                        <FiberManualRecordTwoTone color={"error"} fontSize={"inherit"}/>
-                      </Dot>
-                      <WarningTwoTone color={"error"} />  Soprador</td>
-                    <td>São Paulo</td>
-                    <td>Setor 3</td>
-                    <td style={{color: "red", fontWeight: "bold"}}>1%</td>
-                  </tr>
-                  <tr onClick={() => openMenu()}>
-                    <td>
-                      <Dot>
-                        <FiberManualRecordTwoTone color={"error"} fontSize={"inherit"}/>
-                      </Dot>
-                      <WarningTwoTone color={"error"} />  Soprador</td>
-                    <td>São Paulo</td>
-                    <td>Setor 4</td>
-                    <td style={{color: "red", fontWeight: "bold"}}>4%</td>
-                  </tr>
+                  {arrWarnings.map(renderWarnings)}
                   </tbody>
                 </Table>
               </Card>
@@ -164,14 +224,18 @@ function Index(props: {
           </Content>
         </Page>
       </Layout>
-      <SidebarRight>
-      </SidebarRight>
+      {
+        selectedWarning &&
+        <SidebarRight>
+          {renderWarningView()}
+        </SidebarRight>
+      }
     </>
   )
 }
 
 const mapStateToProps = state => ({
-  user: state.user.user
+  user: state.UserObject.user
 });
 
 const mapDispatchToProps = {
