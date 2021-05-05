@@ -1,17 +1,17 @@
-import {MenuTwoTone} from "@material-ui/icons";
-import {Button} from "react-bootstrap";
-import {toggleMenu} from "../../redux/actions/menuActions";
-import {connect} from "react-redux";
-import {MouseEventHandler} from "react";
-import Link from "next/link"
+import { MenuTwoTone } from "@material-ui/icons";
+import { Button } from "react-bootstrap";
+import { toggleMenu } from "../../redux/actions/menuActions";
+import { connect } from "react-redux";
+import { MouseEventHandler } from "react";
+import Link from "next/link";
 import styled from "styled-components";
-import {User} from "../../types";
+import { User } from "../../types";
 import HeaderUserBox from "../headerUserBox";
 
 interface HeaderTypes {
-  user: User,
-  isOpen: boolean,
-  toggleMenu: MouseEventHandler,
+  user: User;
+  isOpen: boolean;
+  toggleMenu: MouseEventHandler;
 }
 
 const Container = styled.header`
@@ -75,45 +75,48 @@ const Container = styled.header`
       color: #000000;
     }
   }
-`
+`;
 
 const NavRight = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
-`
+`;
 
 const NavLeft = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
-`
+`;
 
 function Header(props: HeaderTypes) {
-  const {
-    user,
-    toggleMenu
-  } = props;
+  const { user, toggleMenu } = props;
 
   return (
     <Container>
       <NavLeft>
-        <Button className="menuButton" variant="outline-light" onClick={toggleMenu}>
+        <Button
+          className="menuButton"
+          variant="outline-light"
+          onClick={toggleMenu}
+        >
           <MenuTwoTone />
         </Button>
-        <Link href="/"><p className="logo">iMachine</p></Link>
+        <Link href="/">
+          <p className="logo">iMachine</p>
+        </Link>
       </NavLeft>
 
       <NavRight>
         <HeaderUserBox />
       </NavRight>
     </Container>
-  )
+  );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.UserObject.user,
   isOpen: state.SidebarLeftComponent.isOpen,
 });

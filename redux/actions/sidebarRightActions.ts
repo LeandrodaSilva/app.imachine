@@ -4,10 +4,9 @@ export const OPEN_MENU = "SIDEBAR_RIGHT_OPEN_MENU";
 
 //Action Creator
 export const closeMenu = () => ({
-  type: CLOSE_MENU
+  type: CLOSE_MENU,
 });
 
 export const openMenu = () => ({
-  type: OPEN_MENU
+  type: OPEN_MENU,
 });
-

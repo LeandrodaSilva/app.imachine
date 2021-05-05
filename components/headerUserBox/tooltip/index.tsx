@@ -3,13 +3,13 @@ import styled from "styled-components";
 const Container = styled.div`
   position: relative;
   display: inline-block;
-  
+
   &:hover {
     > span {
       visibility: visible;
     }
   }
-`
+`;
 
 const Body = styled.span`
   visibility: hidden;
@@ -37,27 +37,19 @@ const Body = styled.span`
     border-style: solid;
     border-color: transparent transparent #ffffff transparent;
   }
-`
+`;
 
-function Tooltip(props: {
-  title?: any,
-  children?: any
-}) {
-  const {
-    title,
-    children
-  } = props
+function Tooltip(props: { title?: any; children?: any }) {
+  const { title, children } = props;
 
   return (
     <>
       <Container>
         {title}
-        <Body>
-          {children}
-        </Body>
+        <Body>{children}</Body>
       </Container>
     </>
-  )
+  );
 }
 
-export default Tooltip
+export default Tooltip;

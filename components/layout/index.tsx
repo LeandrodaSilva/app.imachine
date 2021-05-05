@@ -8,21 +8,17 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
   }
-`
+`;
 
 function Layout(props) {
-  const {
-    children
-  } = props;
+  const { children } = props;
 
   return (
     <Container>
       <Header />
-      <Sidebar>
-        {children}
-      </Sidebar>
+      <Sidebar>{children}</Sidebar>
     </Container>
-  )
+  );
 }
 
-export default Layout
+export default Layout;

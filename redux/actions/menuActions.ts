@@ -5,13 +5,13 @@ export const TOGGLE_MENU = "TOGGLE_MENU";
 
 //Action Creator
 export const closeMenu = () => ({
-  type: CLOSE_MENU
+  type: CLOSE_MENU,
 });
 
 export const openMenu = () => ({
-  type: OPEN_MENU
+  type: OPEN_MENU,
 });
 
 export const toggleMenu = () => ({
-  type: TOGGLE_MENU
+  type: TOGGLE_MENU,
 });

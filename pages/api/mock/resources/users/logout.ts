@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "PUT") {
@@ -10,15 +10,15 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
           message: "Ok",
           metaInfo: {
             apiVersion: "1.0.0",
-            timestamp: "2020-10-26 13:21:50"
-          }
-        }
+            timestamp: "2020-10-26 13:21:50",
+          },
+        },
       ],
-      statusCode: 200
-    })
+      statusCode: 200,
+    });
   } else {
     res.status(404).json({
-      message: "Método não permitido"
-    })
+      message: "Método não permitido",
+    });
   }
-}
+};

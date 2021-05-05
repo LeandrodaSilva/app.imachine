@@ -61,7 +61,8 @@
     font-family: AppleGothic, sans-serif;
     font-weight: bold;
     color: white;
-    text-shadow: 0 10px 10px rgba(0, 0, 0, 0.56), 0 15px 15px rgba(0, 0, 0, 0.68);
+    text-shadow: 0 10px 10px rgba(0, 0, 0, 0.56),
+      0 15px 15px rgba(0, 0, 0, 0.68);
 
     &:first-letter {
       color: red;
@@ -77,7 +78,7 @@
     padding: 5%;
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 10px 10px rgba(0,0,0,0.30), 0 15px 15px rgba(0,0,0,0.22);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3), 0 15px 15px rgba(0, 0, 0, 0.22);
 
     fieldset {
       display: flex;
@@ -97,7 +98,7 @@
       }
 
       .btnLogin {
-        background-color: #272B41;
+        background-color: #272b41;
         &:hover {
           background-color: rgba(39, 43, 65, 0.8);
         }

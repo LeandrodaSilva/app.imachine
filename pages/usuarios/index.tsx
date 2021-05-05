@@ -4,10 +4,9 @@ import Layout from "../../components/layout";
 function Settings(props) {
   return (
     <Layout>
-      <Page title="Configuração de Usuários">
-      </Page>
+      <Page title="Configuração de Usuários"></Page>
     </Layout>
-  )
+  );
 }
 
-export default Settings
+export default Settings;

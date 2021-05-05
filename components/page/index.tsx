@@ -2,8 +2,8 @@ import Head from "next/head";
 import styled from "styled-components";
 
 interface PageProps {
-  title: string,
-  children?: any
+  title: string;
+  children?: any;
 }
 
 const Container = styled.div`
@@ -53,13 +53,10 @@ const Container = styled.div`
       padding-left: 8px;
     }
   }
-`
+`;
 
 function Page(props: PageProps) {
-  const {
-    title,
-    children
-  } = props;
+  const { title, children } = props;
   return (
     <>
       <Container>
@@ -74,11 +71,13 @@ function Page(props: PageProps) {
 
         <footer>
           <span>2021 © iMachine</span>
-          <a href="https://www.techplus.com.br"><img src="/img/icon-techplus.svg" alt="Logo" height={20}/> Techplus</a>
+          <a href="https://www.techplus.com.br">
+            <img src="/img/icon-techplus.svg" alt="Logo" height={20} /> Techplus
+          </a>
         </footer>
       </Container>
     </>
-  )
+  );
 }
 
-export default Page
+export default Page;

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 interface CardProps {
-  title?: string,
-  children?: any
+  title?: string;
+  children?: any;
 }
 
 const Container = styled.div`
@@ -24,7 +24,7 @@ const Container = styled.div`
     height: 100%;
     width: auto;
   }
-`
+`;
 
 const Header = styled.div`
   padding: 20px;
@@ -34,7 +34,7 @@ const Header = styled.div`
   min-height: 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.14);
   font-size: 16px;
-`
+`;
 
 const Body = styled.div`
   display: flex;
@@ -42,29 +42,23 @@ const Body = styled.div`
   justify-content: center;
   height: 100%;
   width: auto;
-`
+`;
 
 function Card(props: CardProps) {
-  const {
-    children,
-    title
-  } = props;
+  const { children, title } = props;
 
   return (
     <>
       <Container>
-        {
-          title &&
+        {title && (
           <Header>
             <span>{title}</span>
           </Header>
-        }
-        <Body>
-          {children}
-        </Body>
+        )}
+        <Body>{children}</Body>
       </Container>
     </>
-  )
+  );
 }
 
-export default Card
+export default Card;

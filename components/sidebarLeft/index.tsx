@@ -1,8 +1,12 @@
-import {closeMenu} from "../../redux/actions/menuActions";
-import {connect} from "react-redux";
+import { closeMenu } from "../../redux/actions/menuActions";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import Link from "next/link";
-import {BusinessTwoTone, HomeTwoTone, PersonTwoTone} from "@material-ui/icons";
+import {
+  BusinessTwoTone,
+  HomeTwoTone,
+  PersonTwoTone,
+} from "@material-ui/icons";
 
 const Container = styled.div`
   display: flex;
@@ -39,7 +43,7 @@ const Container = styled.div`
       min-width: 280px;
       height: 100%;
       padding: 15px 15px 55px;
-      transition: width ease .1s;
+      transition: width ease 0.1s;
       z-index: 998;
     }
 
@@ -77,7 +81,7 @@ const Container = styled.div`
       padding-left: 0;
     }
   }
-`
+`;
 
 const Item = styled.li`
   display: flex;
@@ -87,7 +91,7 @@ const Item = styled.li`
   width: 100%;
   border-radius: 4px;
   font-size: 14px;
-  color: hsla(0, 0%, 100%, .65) !important;
+  color: hsla(0, 0%, 100%, 0.65) !important;
   transition: background-color ease-out 0.5s;
   padding: 0 30px;
   color: #343952;
@@ -102,11 +106,11 @@ const Item = styled.li`
     cursor: pointer;
     background-color: rgba(184, 187, 205, 0.1);
   }
-`
+`;
 
 const Icon = styled.div`
   margin-right: 5px;
-`
+`;
 
 const Dimmer = styled.div`
   width: 100vw;
@@ -117,14 +121,10 @@ const Dimmer = styled.div`
   right: 0;
   background-color: rgba(0, 0, 0, 0.35);
   z-index: 999;
-`
+`;
 
 function Sidebar(props) {
-  const {
-    isOpen,
-    children,
-    closeMenu,
-  } = props;
+  const { isOpen, children, closeMenu } = props;
 
   return (
     <>
@@ -132,27 +132,40 @@ function Sidebar(props) {
         <nav className="menu">
           <ol className="list">
             <Link href="/">
-              <Item className="item"><Icon><HomeTwoTone/></Icon> <span>Dashboard</span></Item>
+              <Item className="item">
+                <Icon>
+                  <HomeTwoTone />
+                </Icon>{" "}
+                <span>Dashboard</span>
+              </Item>
             </Link>
             <Link href="/organizacao">
-              <Item className="item"><Icon><BusinessTwoTone/></Icon> <span>Organização</span></Item>
+              <Item className="item">
+                <Icon>
+                  <BusinessTwoTone />
+                </Icon>{" "}
+                <span>Organização</span>
+              </Item>
             </Link>
             <Link href="/usuarios">
-              <Item className="item"><Icon><PersonTwoTone/></Icon> <span>Usuários</span></Item>
+              <Item className="item">
+                <Icon>
+                  <PersonTwoTone />
+                </Icon>{" "}
+                <span>Usuários</span>
+              </Item>
             </Link>
           </ol>
         </nav>
       </Container>
-      {isOpen && <Dimmer onClick={closeMenu}/>}
-      <div className="children">
-        {children}
-      </div>
+      {isOpen && <Dimmer onClick={closeMenu} />}
+      <div className="children">{children}</div>
     </>
-  )
+  );
 }
 
-const mapStateToProps = state => ({
-  isOpen: state.SidebarLeftComponent.isOpen
+const mapStateToProps = (state) => ({
+  isOpen: state.SidebarLeftComponent.isOpen,
 });
 
 const mapDispatchToProps = {

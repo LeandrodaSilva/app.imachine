@@ -1,7 +1,7 @@
-import {closeMenu} from "../../redux/actions/sidebarRightActions";
-import {connect} from "react-redux";
+import { closeMenu } from "../../redux/actions/sidebarRightActions";
+import { connect } from "react-redux";
 import styled from "styled-components";
-import {CloseTwoTone} from "@material-ui/icons";
+import { CloseTwoTone } from "@material-ui/icons";
 
 const Container = styled.div`
   display: flex;
@@ -20,14 +20,14 @@ const Container = styled.div`
     width: 100%;
     min-width: 100%;
     max-width: 100%;
-    
+
     form {
       z-index: 1052;
       width: 400px;
       min-width: 400px;
       max-width: 400px;
       transform: translate(-0, 0);
-      
+
       > button {
         transform: rotate(0deg);
         transition: all ease-in-out 0.5s;
@@ -39,7 +39,7 @@ const Container = styled.div`
     width: 0;
     min-width: 0;
     max-width: 0;
-    
+
     form {
       width: 0;
       min-width: 0;
@@ -111,7 +111,7 @@ const Container = styled.div`
       }
     }
   }
-`
+`;
 
 const Dimmer = styled.div`
   width: 100vw;
@@ -122,35 +122,28 @@ const Dimmer = styled.div`
   right: 0;
   background-color: rgba(0, 0, 0, 0.35);
   z-index: 1051;
-`
+`;
 
-
-const Form = styled.form`
-  
-`
+const Form = styled.form``;
 
 function SidebarRight(props) {
-  const {
-    isOpen,
-    children,
-    closeMenu
-  } = props;
+  const { isOpen, children, closeMenu } = props;
 
   return (
     <Container className={isOpen ? "open" : "close"}>
-      {isOpen && <Dimmer onClick={closeMenu}/>}
+      {isOpen && <Dimmer onClick={closeMenu} />}
       <Form>
-        <button type="button" onClick={closeMenu}><CloseTwoTone/></button>
-        <div className="children">
-          {children}
-        </div>
+        <button type="button" onClick={closeMenu}>
+          <CloseTwoTone />
+        </button>
+        <div className="children">{children}</div>
       </Form>
     </Container>
-  )
+  );
 }
 
-const mapStateToProps = state => ({
-  isOpen: state.SidebarRightComponent.isOpen
+const mapStateToProps = (state) => ({
+  isOpen: state.SidebarRightComponent.isOpen,
 });
 
 const mapDispatchToProps = {

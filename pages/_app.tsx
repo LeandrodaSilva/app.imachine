@@ -1,32 +1,31 @@
-import '../styles/globals.scss'
-import React, {FC, useEffect, useState} from 'react';
-import {AppProps} from 'next/app';
-import {wrapper} from "../redux/store";
-import {useRouter} from "next/router";
+import "../styles/globals.scss";
+import React, { FC, useEffect, useState } from "react";
+import { AppProps } from "next/app";
+import { wrapper } from "../redux/store";
+import { useRouter } from "next/router";
 
-const WrappedApp: FC<AppProps> = ({Component, pageProps}) => {
+const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
   const verifySession = () => {
-    const key = localStorage.getItem('session');
+    const key = localStorage.getItem("session");
     if (!key) {
-      router.push('/login').then(value => console.log("Redirecting to /login"));
+      router
+        .push("/login")
+        .then((value) => console.log("Redirecting to /login"));
     }
-  }
+  };
 
   useEffect(() => {
     verifySession();
-  }, [mounted])
+  }, [mounted]);
 
   useEffect(() => {
-    setMounted(true)
-  })
+    setMounted(true);
+  });
 
-  return (
-    <Component {...pageProps} />
-  );
-}
+  return <Component {...pageProps} />;
+};
 
 export default wrapper.withRedux(WrappedApp);
-

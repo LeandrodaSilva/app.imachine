@@ -1,10 +1,10 @@
-import {AnyAction} from "redux";
-import {SET_USER} from "../actions/userActions";
-import {defineState} from 'redux-localstore'
-import {User} from "../../types";
+import { AnyAction } from "redux";
+import { SET_USER } from "../actions/userActions";
+import { defineState } from "redux-localstore";
+import { User } from "../../types";
 
 export interface UserState {
-  user: User,
+  user: User;
 }
 
 const defaultState = {
@@ -18,20 +18,19 @@ const defaultState = {
     },
     image: "",
     permission_level: 0,
-    access_token: ""
-  }
-}
+    access_token: "",
+  },
+};
 
-const initialState = defineState(defaultState)('user');
+const initialState = defineState(defaultState)("user");
 
 const userReducer = (state: UserState = initialState, action: AnyAction) => {
   switch (action.type) {
     case SET_USER:
-      return {...state, user: action.user};
+      return { ...state, user: action.user };
     default:
-      return {...state};
+      return { ...state };
   }
 };
 
 export default userReducer;
-
