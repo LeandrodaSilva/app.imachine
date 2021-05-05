@@ -11,11 +11,11 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 8px;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.10), 0 1px 1px rgba(0,0,0,0.12);
+  //box-shadow: 0 1px 1px rgba(0,0,0,0.10), 0 1px 1px rgba(0,0,0,0.12);
 
-  &:hover {
-    box-shadow: 0 5px 5px rgba(0,0,0,0.30), 0 5px 5px rgba(0,0,0,0.22);
-  }
+  //&:hover {
+  //  box-shadow: 0 5px 5px rgba(0,0,0,0.30), 0 5px 5px rgba(0,0,0,0.22);
+  //}
 
   .body {
     display: flex;

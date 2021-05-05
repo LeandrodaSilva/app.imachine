@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/globals.scss'
 import React, {FC, useEffect, useState} from 'react';
 import {AppProps} from 'next/app';

@@ -1,5 +1,12 @@
-import Chart from 'react-apexcharts'
+import dynamic from "next/dynamic";
 import {ApexOptions} from "apexcharts";
+
+const Chart = dynamic(
+  () => {
+    return import('react-apexcharts');
+  },
+  { ssr: false }
+);
 
 interface AreaProps {
   options?: ApexOptions,
@@ -102,28 +109,31 @@ function Line(props: AreaProps) {
     }],
   } = props;
 
-  return (
-    <div className="line">
-      <Chart
-        options={{
-          colors: ['#009902', '#ff9900'],
-          labels: [''],
-          legend: {
-            show: false
-          },
-          xaxis: {
-            type: 'datetime'
-          },
-          dataLabels: {
-            enabled: false
-          },
-        }}
-        series={series}
-        type="line"
-        width="280"
-      />
-    </div>
-  );
+  if (typeof window !== 'undefined') {
+    return (
+      <div className="line">
+        <Chart
+          options={{
+            colors: ['#009902', '#ff9900'],
+            labels: [''],
+            legend: {
+              show: false
+            },
+            xaxis: {
+              type: 'datetime'
+            },
+            dataLabels: {
+              enabled: false
+            },
+          }}
+          series={series}
+          type="line"
+          width="280"
+        />
+      </div>
+    );
+  }
+  return undefined
 }
 
 export default Line;

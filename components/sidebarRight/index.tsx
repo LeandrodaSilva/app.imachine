@@ -137,7 +137,7 @@ function SidebarRight(props) {
   } = props;
 
   return (
-    <Container onClick={closeMenu} className={isOpen ? "open" : "close"}>
+    <Container className={isOpen ? "open" : "close"}>
       {isOpen && <Dimmer onClick={closeMenu}/>}
       <Form>
         <button type="button" onClick={closeMenu}><CloseTwoTone/></button>

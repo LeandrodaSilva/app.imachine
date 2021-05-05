@@ -79,13 +79,14 @@ const WarningViewBodySensor = styled.li`
 const Table = styled.table`
   width: 100%;
   padding-left: 10px;
+  margin: 20px;
   min-height: 100px;
 
   tr {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(189, 189, 189, 0.49);
+    border-bottom: 1px solid rgba(189, 189, 189, 0.2);
     width: available;
     padding: 4px;
 
@@ -224,13 +225,9 @@ function Index(props: {
           </Content>
         </Page>
       </Layout>
-      {
-        (mounted && selectedWarning)
-        ? <SidebarRight>
-            {renderWarningView()}
-          </SidebarRight>
-        : undefined
-      }
+      <SidebarRight>
+        {(mounted && selectedWarning) && renderWarningView()}
+      </SidebarRight>
     </>
   )
 }
