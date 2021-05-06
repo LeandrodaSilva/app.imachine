@@ -22,6 +22,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import TableLoading from "../../components/loadingTable";
 
 const ButtonsGroup = styled.div`
   display: flex;
@@ -186,7 +187,7 @@ const Usuarios: FC<any> = (props) => {
     }
   }, [mounted]);
 
-  const renderUser = (user: UserList) => {
+  const renderUser = (user: UserList, i: number) => {
     let permission = "";
 
     switch (user.permission_level) {
@@ -201,7 +202,7 @@ const Usuarios: FC<any> = (props) => {
     }
 
     return (
-      <tr>
+      <tr key={i}>
         <td>{user.user}</td>
         <td>{user.email}</td>
         <td>{permission}</td>
@@ -288,6 +289,7 @@ const Usuarios: FC<any> = (props) => {
           </Row>
         </Content>
       </Page>
+
       <SidebarRight color="light">
         <WarningView>
           <WarningViewHeader>

@@ -2,6 +2,7 @@ import { closeMenu } from "../../redux/actions/menuActions";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   BusinessTwoTone,
   HomeTwoTone,
@@ -23,7 +24,7 @@ const Container = styled.div`
     width: 0;
 
     &.block {
-      width: fit-content;
+      width: 240px;
 
       .menu {
         display: block;
@@ -83,7 +84,32 @@ const Container = styled.div`
   }
 `;
 
+const BorderGradient = styled.div`
+  background: ${(props) =>
+    props.active
+      ? "linear-gradient(to right,#4bbef8,#081b2f,#081b2f,#081b2f,#081b2f)"
+      : "#081b2f"};
+  padding: 0px 0px 0px 3px;
+  border-radius: 4px;
+  transition: background ease-out 0.5s;
+
+  &:hover {
+    background: linear-gradient(
+      to right,
+      #08a9fa,
+      #081b2f,
+      #081b2f,
+      #081b2f,
+      #081b2f,
+      #081b2f,
+      #081b2f,
+      #081b2f
+    );
+  }
+`;
+
 const Item = styled.li`
+  background-color: #081b2f;
   display: flex;
   align-items: center;
   -webkit-box-align: center;
@@ -116,14 +142,19 @@ const Dimmer = styled.div`
   width: 100vw;
   height: 100%;
   display: block;
-  position: absolute;
+  position: fixed;
   top: 50px;
   right: 0;
   background-color: rgba(0, 0, 0, 0.35);
   z-index: 999;
+
+  @media only screen and (min-width: 600px) {
+    display: none;
+  }
 `;
 
 function Sidebar(props) {
+  const router = useRouter();
   const { isOpen, children, closeMenu } = props;
 
   return (
@@ -132,28 +163,36 @@ function Sidebar(props) {
         <nav className="menu">
           <ol className="list">
             <Link href="/">
-              <Item className="item">
-                <Icon>
-                  <HomeTwoTone />
-                </Icon>{" "}
-                <span>Dashboard</span>
-              </Item>
+              <BorderGradient active={router.pathname === "/"}>
+                <Item className="item" active={router.pathname === "/"}>
+                  <Icon>
+                    <HomeTwoTone />
+                  </Icon>{" "}
+                  <span>Dashboard</span>
+                </Item>
+              </BorderGradient>
             </Link>
+
             <Link href="/organizacao">
-              <Item className="item">
-                <Icon>
-                  <BusinessTwoTone />
-                </Icon>{" "}
-                <span>Organização</span>
-              </Item>
+              <BorderGradient active={router.pathname === "/organizacao"}>
+                <Item className="item">
+                  <Icon>
+                    <BusinessTwoTone />
+                  </Icon>{" "}
+                  <span>Organização</span>
+                </Item>
+              </BorderGradient>
             </Link>
+
             <Link href="/usuarios">
-              <Item className="item">
-                <Icon>
-                  <PersonTwoTone />
-                </Icon>{" "}
-                <span>Usuários</span>
-              </Item>
+              <BorderGradient active={router.pathname === "/usuarios"}>
+                <Item className="item">
+                  <Icon>
+                    <PersonTwoTone />
+                  </Icon>{" "}
+                  <span>Usuários</span>
+                </Item>
+              </BorderGradient>
             </Link>
           </ol>
         </nav>

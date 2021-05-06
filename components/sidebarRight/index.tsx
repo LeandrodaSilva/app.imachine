@@ -6,7 +6,7 @@ import { FC, MouseEventHandler } from "react";
 
 const Container = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   width: 0;
@@ -15,6 +15,7 @@ const Container = styled.div`
   min-height: 100%;
   overflow: hidden;
   color: ${(props) => (props.color === "light" ? "black" : "white")};
+  z-index: 99999;
 
   @media only screen and (max-width: 600px) {
     &.open {

@@ -13,6 +13,7 @@ import Imachine from "../services/imachine";
 import Link from "next/link";
 import Line from "../components/charts/line";
 import Slide from "../components/slide";
+import TableLoading from "../components/loadingTable";
 
 const Row = styled.div`
   display: flex;
@@ -249,7 +250,11 @@ function Index(props: { user: User; openMenu: Function }) {
               <Card title="Avisos">
                 <Table>
                   <thead />
-                  <tbody>{arrWarnings.map(renderWarnings)}</tbody>
+                  {arrWarnings.length ? (
+                    <tbody>{arrWarnings.map(renderWarnings)}</tbody>
+                  ) : (
+                    <TableLoading />
+                  )}
                 </Table>
               </Card>
             </Row>
