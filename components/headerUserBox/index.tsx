@@ -12,7 +12,7 @@ function HeaderUserBox(props) {
   const doLogout = (evt) => {
     evt.preventDefault();
 
-    Imachine.logout()
+    Imachine.users.logout()
       .then((resp) => {
         localStorage.removeItem("session");
         router.push("/login");

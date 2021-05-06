@@ -45,7 +45,7 @@ function Login(props: LoginProps) {
     }
 
     try {
-      const resp = await Imachine.login(values.email, values.password);
+      const resp = await Imachine.users.login(values.email, values.password);
       console.log(resp);
       if (resp.status === 200) {
         const loggedUser = resp?.data?.results[0]?.data[0];

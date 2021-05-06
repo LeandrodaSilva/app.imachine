@@ -13,9 +13,9 @@ const Container = styled.div`
   position: fixed;
   left: 0;
   top: 50px;
-  width: 300px;
+  width: 240px;
   height: 100%;
-  background-color: #282c41;
+  background-color: #081b2f;
   z-index: 1050;
   overflow: hidden;
 
@@ -23,7 +23,7 @@ const Container = styled.div`
     width: 0;
 
     &.block {
-      width: 300px;
+      width: fit-content;
 
       .menu {
         display: block;

@@ -113,26 +113,24 @@ function Line(props: AreaProps) {
 
   if (typeof window !== "undefined") {
     return (
-      <div className="line">
-        <Chart
-          options={{
-            colors: ["#009902", "#ff9900"],
-            labels: [""],
-            legend: {
-              show: false,
-            },
-            xaxis: {
-              type: "datetime",
-            },
-            dataLabels: {
-              enabled: false,
-            },
-          }}
-          series={series}
-          type="line"
-          width="280"
-        />
-      </div>
+      <Chart
+        options={{
+          colors: ["#009902", "#ff9900"],
+          labels: [""],
+          legend: {
+            show: false,
+          },
+          xaxis: {
+            type: "datetime",
+          },
+          dataLabels: {
+            enabled: false,
+          },
+        }}
+        series={series}
+        type="line"
+        width="250"
+      />
     );
   }
   return undefined;

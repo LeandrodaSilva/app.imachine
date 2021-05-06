@@ -21,7 +21,7 @@ const Container = styled.header`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  background-color: rgb(39, 43, 65);
+  background-color: #081b2f;
   color: white;
   height: 50px;
   padding-right: 10px;
@@ -56,10 +56,12 @@ const Container = styled.header`
   .menuButton {
     border: none;
     margin-right: 4px;
+    background-color: transparent;
+    color: white;
 
     &:hover {
-      background-color: #343952;
-      color: white;
+      cursor: pointer;
+      opacity: 0.6;
     }
   }
 

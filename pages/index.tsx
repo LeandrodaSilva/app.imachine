@@ -12,12 +12,14 @@ import { useEffect, useState } from "react";
 import Imachine from "../services/imachine";
 import Link from "next/link";
 import Line from "../components/charts/line";
+import Slide from "../components/slide";
 
 const Row = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
+  padding-bottom: 40px;
 `;
 
 const Content = styled.div`
@@ -26,7 +28,7 @@ const Content = styled.div`
 `;
 
 const WarningView = styled.div`
-  padding: 0 50px;
+  padding: 0 5px;
 `;
 
 const WarningViewHeader = styled.div`
@@ -46,10 +48,15 @@ const WarningViewHeader = styled.div`
   }
 `;
 
-const WarningViewBody = styled.div``;
+const WarningViewBody = styled.div`
+  display: flex;
+  align-items: start;
+  justify-content: center;
+`;
 
-const WarningViewBodySensor = styled.li`
-  padding-bottom: 10px;
+const WarningViewBodySensor = styled.div`
+  color: white;
+  padding-bottom: 20px;
 
   &:hover {
     opacity: 0.8;
@@ -64,7 +71,10 @@ const WarningViewBodySensor = styled.li`
   .body {
     height: auto;
     border-radius: 8px;
-    background-color: #2a2e44;
+    background-color: #0a213a;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
   }
 
   .footer {
@@ -137,16 +147,27 @@ function Index(props: { user: User; openMenu: Function }) {
           </span>
         </WarningViewHeader>
         <WarningViewBody>
-          <ol>
-            {renderWarningViewItem()}
-            {renderWarningViewItem()}
-            {renderWarningViewItem()}
-            {renderWarningViewItem()}
-            {renderWarningViewItem()}
-            {renderWarningViewItem()}
-            {renderWarningViewItem()}
-            {renderWarningViewItem()}
-          </ol>
+          <Slide id={"slide-items-view"}>
+            <div>
+              {renderWarningViewItem()}
+              {renderWarningViewItem()}
+            </div>
+
+            <div>
+              {renderWarningViewItem()}
+              {renderWarningViewItem()}
+            </div>
+          </Slide>
+          {/*<ol>*/}
+          {/*  {renderWarningViewItem()}*/}
+          {/*  {renderWarningViewItem()}*/}
+          {/*  {renderWarningViewItem()}*/}
+          {/*  {renderWarningViewItem()}*/}
+          {/*  {renderWarningViewItem()}*/}
+          {/*  {renderWarningViewItem()}*/}
+          {/*  {renderWarningViewItem()}*/}
+          {/*  {renderWarningViewItem()}*/}
+          {/*</ol>*/}
         </WarningViewBody>
       </WarningView>
     );
@@ -212,11 +233,22 @@ function Index(props: { user: User; openMenu: Function }) {
     <>
       <Layout>
         <Page title={user.company.company_name}>
+          {/*<Content>*/}
+          {/*  <Row>*/}
+          {/*    <Card title="Slider">*/}
+          {/*      <Slide id={"slide-items"}>*/}
+          {/*        {renderWarningViewItem()}*/}
+          {/*        {renderWarningViewItem()}*/}
+          {/*      </Slide>*/}
+          {/*    </Card>*/}
+          {/*  </Row>*/}
+          {/*</Content>*/}
+
           <Content>
             <Row>
               <Card title="Avisos">
                 <Table>
-                  <thead></thead>
+                  <thead />
                   <tbody>{arrWarnings.map(renderWarnings)}</tbody>
                 </Table>
               </Card>

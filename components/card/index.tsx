@@ -11,6 +11,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 8px;
+  overflow: hidden;
   //box-shadow: 0 1px 1px rgba(0,0,0,0.10), 0 1px 1px rgba(0,0,0,0.12);
 
   //&:hover {

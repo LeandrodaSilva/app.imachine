@@ -13,6 +13,14 @@ export interface User {
   access_token: string;
 }
 
+export interface UserList {
+  id: number;
+  user: string;
+  email: string;
+  permission_level: number;
+  company_id: number,
+}
+
 export interface Warning {
   id: number;
   name: string;
