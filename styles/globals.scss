@@ -131,3 +131,8 @@ a {
     background-position: 0% 51%;
   }
 }
+
+.MuiListItem-button:hover {
+  text-decoration: none;
+  background-color: rgba(104, 104, 104, 0.295) !important;
+}
