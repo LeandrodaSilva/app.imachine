@@ -304,7 +304,7 @@ const Usuarios: FC<any> = (props) => {
               <TextField
                 id="nome"
                 label="Nome"
-                variant="outlined"
+                variant="standard"
                 fullWidth
                 size="small"
                 value={formValues.user}
@@ -317,7 +317,7 @@ const Usuarios: FC<any> = (props) => {
               <TextField
                 id="email"
                 label="E-Mail"
-                variant="outlined"
+                variant="standard"
                 fullWidth
                 size="small"
                 value={formValues.email}
@@ -326,15 +326,12 @@ const Usuarios: FC<any> = (props) => {
           </div>
 
           <div className="form-group">
-            <FormControl variant="outlined" fullWidth size="small">
-              <InputLabel id="demo-simple-select-filled-label">
-                Permissão
-              </InputLabel>
+            <FormControl variant="standard" fullWidth size="small">
+              <InputLabel htmlFor="permission_level">Age</InputLabel>
               <Select
-                labelId="demo-simple-select-filled-label"
-                id="demo-simple-select-filled"
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
                 value={formValues.permission}
-                // variant="outlined"
                 // onChange={handleChange}
               >
                 <MenuItem value={1}>Editor</MenuItem>

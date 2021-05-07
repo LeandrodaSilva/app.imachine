@@ -28,7 +28,7 @@ const Container = styled.header`
   padding-right: 10px;
   padding-left: 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  z-index: 99999;
+  z-index: 1;
 
   @media only screen and (min-width: 600px) {
     .menuButton {

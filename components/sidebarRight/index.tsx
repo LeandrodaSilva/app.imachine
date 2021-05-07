@@ -15,7 +15,7 @@ const Container = styled.div`
   min-height: 100%;
   overflow: hidden;
   color: ${(props) => (props.color === "light" ? "black" : "white")};
-  z-index: 99999;
+  z-index: 1;
 
   @media only screen and (max-width: 600px) {
     &.open {
