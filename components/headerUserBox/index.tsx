@@ -25,15 +25,7 @@ function HeaderUserBox(props) {
     <>
       {user && (
         <>
-          <Tooltip title={user.user}>
-            <Button
-              className="userButton"
-              variant="outline-light"
-              onClick={doLogout}
-            >
-              Sair
-            </Button>
-          </Tooltip>
+          <Tooltip title={user.user}></Tooltip>
         </>
       )}
     </>
