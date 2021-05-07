@@ -12,7 +12,8 @@ function HeaderUserBox(props) {
   const doLogout = (evt) => {
     evt.preventDefault();
 
-    Imachine.users.logout()
+    Imachine.users
+      .logout()
       .then((resp) => {
         localStorage.removeItem("session");
         router.push("/login");
@@ -23,15 +24,17 @@ function HeaderUserBox(props) {
   return (
     <>
       {user && (
-        <Tooltip title={user.user}>
-          <Button
-            className="userButton"
-            variant="outline-light"
-            onClick={doLogout}
-          >
-            Sair
-          </Button>
-        </Tooltip>
+        <>
+          <Tooltip title={user.user}>
+            <Button
+              className="userButton"
+              variant="outline-light"
+              onClick={doLogout}
+            >
+              Sair
+            </Button>
+          </Tooltip>
+        </>
       )}
     </>
   );

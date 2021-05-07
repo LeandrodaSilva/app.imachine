@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import { AccountCircleTwoTone } from "@material-ui/icons";
 
 const Container = styled.div`
   position: relative;
   display: inline-block;
+  padding-right: 20px;
 
   &:hover {
     > span {
@@ -16,22 +18,22 @@ const Body = styled.span`
   background-color: #ffffff;
   color: #000000;
   text-align: center;
-  padding: 5px;
+  padding: 10px;
   border-radius: 6px;
 
   position: absolute;
-  z-index: 1;
+  z-index: 2;
 
   width: 120px;
-  top: 100%;
-  left: 50%;
-  margin-left: -90px;
+  top: 110%;
+  left: 60%;
+  margin-left: -110px;
 
   &:after {
     content: " ";
     position: absolute;
     bottom: 100%;
-    left: 50%;
+    left: 55%;
     margin-left: 25px;
     border-width: 5px;
     border-style: solid;
@@ -45,6 +47,7 @@ function Tooltip(props: { title?: any; children?: any }) {
   return (
     <>
       <Container>
+        <AccountCircleTwoTone />
         {title}
         <Body>{children}</Body>
       </Container>

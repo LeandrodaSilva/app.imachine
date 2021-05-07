@@ -16,7 +16,6 @@ interface HeaderTypes {
 
 const Container = styled.header`
   position: fixed;
-  overflow: hidden;
   top: 0;
   width: 100%;
   display: flex;
@@ -70,12 +69,15 @@ const Container = styled.header`
   .userButton {
     border: none;
     margin-right: 4px;
+    padding: 4px;
     background-color: #ffffff;
     color: #000000;
     width: 100%;
+    border-radius: 6px;
 
     &:hover {
-      background-color: rgba(52, 57, 82, 0.4);
+      cursor: pointer;
+      background-color: rgba(117, 118, 124, 0.267);
       color: #000000;
     }
   }
