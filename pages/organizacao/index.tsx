@@ -136,9 +136,6 @@ function Settings(props) {
                         <Collapse in={open3} timeout="auto" unmountOnExit>
                           <List component="div" disablePadding>
                             <ListItem button className={classes.nested3}>
-                              <ListItemIcon>
-                                <PriorityHigh />
-                              </ListItemIcon>
                               <ListItemText primary="Mancal dianteiro motor" />
                               <span>
                                 <Button
@@ -158,9 +155,6 @@ function Settings(props) {
                             </ListItem>
 
                             <ListItem button className={classes.nested3}>
-                              <ListItemIcon>
-                                <PriorityHigh />
-                              </ListItemIcon>
                               <ListItemText primary="Mancal traseiro motor" />
                               <span>
                                 <Button
