@@ -17,7 +17,7 @@ const Container = styled.div`
   width: 240px;
   height: 100%;
   background-color: #081b2f;
-  z-index: 1050;
+  z-index: 1;
   overflow: hidden;
 
   @media only screen and (max-width: 600px) {

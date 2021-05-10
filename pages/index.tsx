@@ -14,6 +14,7 @@ import Link from "next/link";
 import Line from "../components/charts/line";
 import Slide from "../components/slide";
 import TableLoading from "../components/loadingTable";
+import dayjs from "dayjs";
 
 const Row = styled.div`
   display: flex;
@@ -214,7 +215,7 @@ function Index(props: { user: User; openMenu: Function }) {
           </td>
           <td>{warning.factory}</td>
           <td>{warning.sector}</td>
-          <td>{warning.timestamp}</td>
+          <td>{dayjs(warning.timestamp).format('D/M/YYYY H:m:s')}</td>
         </tr>
       </>
     );

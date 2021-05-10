@@ -14,7 +14,22 @@ import DraftsIcon from "@material-ui/icons/Drafts";
 import Imachine from "../../../services/imachine";
 import { useRouter } from "next/router";
 import { withStyles } from "@material-ui/core";
-import { green, purple, common } from "@material-ui/core/colors";
+import {
+  green,
+  purple,
+  common,
+  deepOrange,
+  deepPurple,
+} from "@material-ui/core/colors";
+import Avatar from "@material-ui/core/Avatar";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  color: {
+    color: "black",
+    backgroundColor: "white",
+  },
+}));
 
 const ColorButton = withStyles((theme) => ({
   root: {
@@ -71,6 +86,7 @@ function Tooltip(props: { title?: any; children?: any }) {
   const { title, children } = props;
   const [anchorEl, setAnchorEl] = useState(null);
   const router = useRouter();
+  const classes = useStyles();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -98,11 +114,11 @@ function Tooltip(props: { title?: any; children?: any }) {
   return (
     <>
       <div>
-        <ColorButton
-          aria-describedby={id}
-          startIcon={<AccountCircleTwoTone color="inherit" />}
-          onClick={handleClick}
-        ></ColorButton>
+        <ColorButton aria-describedby={id} onClick={handleClick}>
+          <Avatar className={classes.color}>
+            <AccountCircleTwoTone />
+          </Avatar>
+        </ColorButton>
         <Popover
           id={id}
           open={open}
