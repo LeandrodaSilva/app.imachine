@@ -327,12 +327,17 @@ const Usuarios: FC<any> = (props) => {
 
           <div className="form-group">
             <FormControl variant="standard" fullWidth size="small">
-              <InputLabel htmlFor="permission_level">Age</InputLabel>
+              <InputLabel htmlFor="permission_level">Permissão</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={formValues.permission}
-                // onChange={handleChange}
+                onChange={(evt) =>
+                  setFormValues({
+                    ...formValues,
+                    ...{ permission: evt.target.value },
+                  })
+                }
               >
                 <MenuItem value={1}>Editor</MenuItem>
                 <MenuItem value={2}>Administrador</MenuItem>
