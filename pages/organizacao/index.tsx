@@ -32,6 +32,7 @@ import Typography from "@material-ui/core/Typography";
 import FolderIcon from "@material-ui/icons/Folder";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Image from "next/image";
+import Swal from "sweetalert2";
 import {
   AddTwoTone,
   BarChartTwoTone,
@@ -88,7 +89,7 @@ const Content = styled.div`
 const ButtonsGroup = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding-bottom: 10px;
 
   > button {
@@ -191,10 +192,36 @@ const Organizacao: FC<any> = (props) => {
   const [open3, setOpen3] = useState(false);
   const [dense, setDense] = useState(false);
   const [selectedView, setSelectedView] = useState("");
-  const [unidadeImg, setUnidadeImg] = useState<any>("");
+
+  const [imgBase64, setImgBase64] = useState<any>("");
+
+  const [unidadeId, setUnidadeId] = useState<any>("");
+  const [unidadeNome, setUnidadeNome] = useState<any>("");
+
+  const [setorId, setSetorId] = useState<any>("");
+  const [setorNome, setSetorNome] = useState<any>("");
+
+  const [maquinaId, setMaquinaId] = useState<any>("");
+  const [maquinaNome, setMaquinaNome] = useState<any>("");
+
+  const [sensorNome, setSensorNome] = useState<any>("");
+  const [sensorCodigo, setSensorCodigo] = useState<any>("");
 
   const handleClick = () => {
     setOpen(!open);
+  };
+
+  const resetStateOfSidebarMenuRight = () => {
+    setSelectedView("");
+    setImgBase64("");
+    setUnidadeId("");
+    setUnidadeNome("");
+    setSetorId("");
+    setSetorNome("");
+    setMaquinaId("");
+    setMaquinaNome("");
+    setSensorNome("");
+    setSensorCodigo("");
   };
 
   const toBase64 = (file) =>
@@ -218,7 +245,7 @@ const Organizacao: FC<any> = (props) => {
 
           <WarningViewBody>
             <div className="form-group">
-              {!unidadeImg ? (
+              {!imgBase64 ? (
                 <label htmlFor="upload-photo">
                   <input
                     style={{ display: "none" }}
@@ -230,7 +257,7 @@ const Organizacao: FC<any> = (props) => {
                       toBase64(evt.target.files[0]).then(
                         (base64: React.SetStateAction<string>) => {
                           console.log(base64);
-                          setUnidadeImg(base64);
+                          setImgBase64(base64);
                         }
                       )
                     }
@@ -252,7 +279,7 @@ const Organizacao: FC<any> = (props) => {
                 <>
                   <UnidadeImage>
                     <Image
-                      src={unidadeImg}
+                      src={imgBase64}
                       alt="Imagem da unidade"
                       layout="fill"
                       objectFit="cover"
@@ -269,7 +296,7 @@ const Organizacao: FC<any> = (props) => {
                         toBase64(evt.target.files[0]).then(
                           (base64: React.SetStateAction<string>) => {
                             console.log(base64);
-                            setUnidadeImg(base64);
+                            setImgBase64(base64);
                           }
                         )
                       }
@@ -290,6 +317,7 @@ const Organizacao: FC<any> = (props) => {
                 </>
               )}
             </div>
+
             <div className="form-group">
               <FormControl fullWidth>
                 <TextField
@@ -298,7 +326,77 @@ const Organizacao: FC<any> = (props) => {
                   variant="standard"
                   fullWidth
                   size="small"
-                  // value={formValues.user}
+                  value={unidadeNome}
+                  onChange={(evt) => setUnidadeNome(evt.target.value)}
+                />
+              </FormControl>
+            </div>
+
+            <div className="form-group">
+              <ButtonsGroup>
+                <Button
+                  component="button"
+                  color="default"
+                  // variant="outlined"
+                  // size="small"
+                  startIcon={<NavigateBeforeTwoTone />}
+                  onClick={resetStateOfSidebarMenuRight}
+                >
+                  Voltar
+                </Button>
+                <Button
+                  component="button"
+                  color="primary"
+                  variant="outlined"
+                  // size="small"
+                  startIcon={<SaveTwoTone />}
+                  // onClick={() => openMenu()}
+                >
+                  Salvar
+                </Button>
+              </ButtonsGroup>
+            </div>
+          </WarningViewBody>
+        </>
+      );
+    }
+
+    if (selectedView === "setor") {
+      return (
+        <>
+          <WarningView>
+            <WarningViewHeader>
+              <h2>Adicionar Setor</h2>
+              <span></span>
+            </WarningViewHeader>
+          </WarningView>
+
+          <WarningViewBody>
+            <div className="form-group">
+              <FormControl variant="standard" fullWidth size="small">
+                <InputLabel htmlFor="unidade">Unidade</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={unidadeId}
+                  onChange={(evt) => setUnidadeId(evt.target.value)}
+                >
+                  <MenuItem value={1}>Campinas</MenuItem>
+                  <MenuItem value={2}>Bauru</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+
+            <div className="form-group">
+              <FormControl fullWidth>
+                <TextField
+                  id="nome"
+                  label="Nome do Setor"
+                  variant="standard"
+                  fullWidth
+                  size="small"
+                  value={setorNome}
+                  onChange={(evt) => setSetorNome(evt.target.value)}
                 />
               </FormControl>
             </div>
@@ -310,7 +408,272 @@ const Organizacao: FC<any> = (props) => {
                   // variant="outlined"
                   // size="small"
                   startIcon={<NavigateBeforeTwoTone />}
-                  onClick={() => setSelectedView("")}
+                  onClick={resetStateOfSidebarMenuRight}
+                >
+                  Voltar
+                </Button>
+                <Button
+                  component="button"
+                  color="primary"
+                  variant="outlined"
+                  // size="small"
+                  startIcon={<SaveTwoTone />}
+                  // onClick={() => openMenu()}
+                >
+                  Salvar
+                </Button>
+              </ButtonsGroup>
+            </div>
+          </WarningViewBody>
+        </>
+      );
+    }
+
+    if (selectedView === "maquina") {
+      return (
+        <>
+          <WarningView>
+            <WarningViewHeader>
+              <h2>Adicionar Máquina</h2>
+              <span></span>
+            </WarningViewHeader>
+          </WarningView>
+
+          <WarningViewBody>
+            <div className="form-group">
+              {!imgBase64 ? (
+                <label htmlFor="upload-photo">
+                  <input
+                    style={{ display: "none" }}
+                    id="upload-photo"
+                    name="upload-photo"
+                    type="file"
+                    accept="image/*"
+                    onChange={(evt) =>
+                      toBase64(evt.target.files[0]).then(
+                        (base64: React.SetStateAction<string>) => {
+                          console.log(base64);
+                          setImgBase64(base64);
+                        }
+                      )
+                    }
+                  />
+
+                  <Button
+                    fullWidth
+                    component="span"
+                    color="primary"
+                    variant="contained"
+                    // size="small"
+                    startIcon={<AddTwoTone />}
+                    // onClick={() => openMenu()}
+                  >
+                    Selecionar a Imagem
+                  </Button>
+                </label>
+              ) : (
+                <>
+                  <UnidadeImage>
+                    <Image
+                      src={imgBase64}
+                      alt="Imagem da unidade"
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </UnidadeImage>
+                  <label htmlFor="upload-photo">
+                    <input
+                      style={{ display: "none" }}
+                      id="upload-photo"
+                      name="upload-photo"
+                      type="file"
+                      accept="image/*"
+                      onChange={(evt) =>
+                        toBase64(evt.target.files[0]).then(
+                          (base64: React.SetStateAction<string>) => {
+                            console.log(base64);
+                            setImgBase64(base64);
+                          }
+                        )
+                      }
+                    />
+
+                    <Button
+                      fullWidth
+                      component="span"
+                      color="primary"
+                      variant="contained"
+                      // size="small"
+                      startIcon={<EditTwoTone />}
+                      // onClick={() => openMenu()}
+                    >
+                      Alterar imagem
+                    </Button>
+                  </label>
+                </>
+              )}
+            </div>
+
+            <div className="form-group">
+              <FormControl variant="standard" fullWidth size="small">
+                <InputLabel htmlFor="unidade">Unidade</InputLabel>
+                <Select
+                  id="unidade"
+                  value={unidadeId}
+                  onChange={(evt) => setUnidadeId(evt.target.value)}
+                >
+                  <MenuItem value={1}>Campinas</MenuItem>
+                  <MenuItem value={2}>Bauru</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+
+            <div className="form-group">
+              <FormControl variant="standard" fullWidth size="small">
+                <InputLabel htmlFor="setor">Setor</InputLabel>
+                <Select
+                  id="setor"
+                  value={setorId}
+                  onChange={(evt) => setSetorId(evt.target.value)}
+                >
+                  <MenuItem value={1}>Setor 1</MenuItem>
+                  <MenuItem value={2}>Setor 2</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+
+            <div className="form-group">
+              <FormControl fullWidth>
+                <TextField
+                  id="nome"
+                  label="Nome da Máquina"
+                  variant="standard"
+                  fullWidth
+                  size="small"
+                  value={maquinaNome}
+                  onChange={(evt) => setMaquinaNome(evt.target.value)}
+                />
+              </FormControl>
+            </div>
+            <div className="form-group">
+              <ButtonsGroup>
+                <Button
+                  component="button"
+                  color="default"
+                  // variant="outlined"
+                  // size="small"
+                  startIcon={<NavigateBeforeTwoTone />}
+                  onClick={resetStateOfSidebarMenuRight}
+                >
+                  Voltar
+                </Button>
+                <Button
+                  component="button"
+                  color="primary"
+                  variant="outlined"
+                  // size="small"
+                  startIcon={<SaveTwoTone />}
+                  // onClick={() => openMenu()}
+                >
+                  Salvar
+                </Button>
+              </ButtonsGroup>
+            </div>
+          </WarningViewBody>
+        </>
+      );
+    }
+
+    if (selectedView === "sensor") {
+      return (
+        <>
+          <WarningView>
+            <WarningViewHeader>
+              <h2>Adicionar Sensor</h2>
+              <span></span>
+            </WarningViewHeader>
+          </WarningView>
+
+          <WarningViewBody>
+            <div className="form-group">
+              <FormControl variant="standard" fullWidth size="small">
+                <InputLabel htmlFor="unidade">Unidade</InputLabel>
+                <Select
+                  id="unidade"
+                  value={unidadeId}
+                  onChange={(evt) => setUnidadeId(evt.target.value)}
+                >
+                  <MenuItem value={1}>Campinas</MenuItem>
+                  <MenuItem value={2}>Bauru</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+
+            <div className="form-group">
+              <FormControl variant="standard" fullWidth size="small">
+                <InputLabel htmlFor="setor">Setor</InputLabel>
+                <Select
+                  id="setor"
+                  value={setorId}
+                  onChange={(evt) => setSetorId(evt.target.value)}
+                >
+                  <MenuItem value={1}>Setor 1</MenuItem>
+                  <MenuItem value={2}>Setor 2</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+
+            <div className="form-group">
+              <FormControl variant="standard" fullWidth size="small">
+                <InputLabel htmlFor="maquina">Máquina</InputLabel>
+                <Select
+                  id="maquina"
+                  value={maquinaId}
+                  onChange={(evt) => setMaquinaId(evt.target.value)}
+                >
+                  <MenuItem value={1}>Mancal dianteiro motor</MenuItem>
+                  <MenuItem value={2}>Mancal traseiro motor</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+
+            <div className="form-group">
+              <FormControl fullWidth>
+                <TextField
+                  id="nome"
+                  label="Nome do Sensor"
+                  variant="standard"
+                  fullWidth
+                  size="small"
+                  value={sensorNome}
+                  onChange={(evt) => setSensorNome(evt.target.value)}
+                />
+              </FormControl>
+            </div>
+
+            <div className="form-group">
+              <FormControl fullWidth>
+                <TextField
+                  id="serial"
+                  label="Código Serial"
+                  variant="standard"
+                  fullWidth
+                  size="small"
+                  value={sensorCodigo}
+                  onChange={(evt) => setSensorCodigo(evt.target.value)}
+                />
+              </FormControl>
+            </div>
+
+            <div className="form-group">
+              <ButtonsGroup>
+                <Button
+                  component="button"
+                  color="default"
+                  // variant="outlined"
+                  // size="small"
+                  startIcon={<NavigateBeforeTwoTone />}
+                  onClick={resetStateOfSidebarMenuRight}
                 >
                   Voltar
                 </Button>
@@ -355,7 +718,7 @@ const Organizacao: FC<any> = (props) => {
                 </ListItemIcon>
               </ListItem>
 
-              <ListItem button>
+              <ListItem button onClick={(evt) => setSelectedView("setor")}>
                 <ListItemAvatar>
                   <Avatar>
                     <LocalConvenienceStoreTwoTone />
@@ -367,7 +730,7 @@ const Organizacao: FC<any> = (props) => {
                 </ListItemIcon>
               </ListItem>
 
-              <ListItem button>
+              <ListItem button onClick={(evt) => setSelectedView("maquina")}>
                 <ListItemAvatar>
                   <Avatar>
                     <BuildTwoTone />
@@ -379,7 +742,7 @@ const Organizacao: FC<any> = (props) => {
                 </ListItemIcon>
               </ListItem>
 
-              <ListItem button>
+              <ListItem button onClick={(evt) => setSelectedView("sensor")}>
                 <ListItemAvatar>
                   <Avatar>
                     <BarChartTwoTone />
@@ -416,6 +779,7 @@ const Organizacao: FC<any> = (props) => {
                     //   email: "",
                     //   permission: "",
                     // });
+                    resetStateOfSidebarMenuRight();
                     openMenu();
                   }}
                 >
@@ -481,12 +845,11 @@ const Organizacao: FC<any> = (props) => {
                           <Collapse in={open3} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
                               <ListItem button className={classes.nested3}>
+                                <ListItemIcon>
+                                  <BarChartTwoTone />
+                                </ListItemIcon>
                                 <ListItemText primary="Mancal dianteiro motor" />
                                 <span>
-                                  <Button
-                                    startIcon={<VisibilityTwoTone />}
-                                    // variant="outlined"
-                                  />
                                   <Button
                                     startIcon={<Edit />}
                                     // variant="outlined"
@@ -495,17 +858,27 @@ const Organizacao: FC<any> = (props) => {
                                     color="secondary"
                                     startIcon={<Delete />}
                                     // variant="outlined"
+                                    onClick={(evt) => {
+                                      Swal.fire({
+                                        title: "Atenção!",
+                                        text: "Deseja remover este sensor?",
+                                        icon: "warning",
+                                        confirmButtonText: "Sim, remover!",
+                                        confirmButtonColor: "#d30000",
+                                        cancelButtonText: "Não",
+                                        showCancelButton: true,
+                                      });
+                                    }}
                                   />
                                 </span>
                               </ListItem>
 
                               <ListItem button className={classes.nested3}>
+                                <ListItemIcon>
+                                  <BarChartTwoTone />
+                                </ListItemIcon>
                                 <ListItemText primary="Mancal traseiro motor" />
                                 <span>
-                                  <Button
-                                    startIcon={<VisibilityTwoTone />}
-                                    // variant="outlined"
-                                  />
                                   <Button
                                     startIcon={<Edit />}
                                     // variant="outlined"
@@ -514,6 +887,17 @@ const Organizacao: FC<any> = (props) => {
                                     color="secondary"
                                     startIcon={<Delete />}
                                     // variant="outlined"
+                                    onClick={(evt) => {
+                                      Swal.fire({
+                                        title: "Atenção!",
+                                        text: "Deseja remover este sensor?",
+                                        icon: "warning",
+                                        confirmButtonText: "Sim, remover!",
+                                        confirmButtonColor: "#d30000",
+                                        cancelButtonText: "Não",
+                                        showCancelButton: true,
+                                      });
+                                    }}
                                   />
                                 </span>
                               </ListItem>
