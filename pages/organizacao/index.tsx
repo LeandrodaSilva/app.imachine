@@ -33,6 +33,7 @@ import FolderIcon from "@material-ui/icons/Folder";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Image from "next/image";
 import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 import {
   AddTwoTone,
   BarChartTwoTone,
@@ -192,6 +193,7 @@ const Organizacao: FC<any> = (props) => {
   const [open3, setOpen3] = useState(false);
   const [dense, setDense] = useState(false);
   const [selectedView, setSelectedView] = useState("");
+  const router = useRouter();
 
   const [imgBase64, setImgBase64] = useState<any>("");
 
@@ -844,7 +846,13 @@ const Organizacao: FC<any> = (props) => {
 
                           <Collapse in={open3} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
-                              <ListItem button className={classes.nested3}>
+                              <ListItem
+                                button
+                                className={classes.nested3}
+                                onClick={(evt) => {
+                                  router.push("/sensor/1");
+                                }}
+                              >
                                 <ListItemIcon>
                                   <BarChartTwoTone />
                                 </ListItemIcon>
@@ -873,7 +881,13 @@ const Organizacao: FC<any> = (props) => {
                                 </span>
                               </ListItem>
 
-                              <ListItem button className={classes.nested3}>
+                              <ListItem
+                                button
+                                className={classes.nested3}
+                                onClick={(evt) => {
+                                  router.push("/sensor/1");
+                                }}
+                              >
                                 <ListItemIcon>
                                   <BarChartTwoTone />
                                 </ListItemIcon>

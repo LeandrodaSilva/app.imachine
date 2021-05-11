@@ -132,7 +132,9 @@ function Index(props: { user: User; openMenu: Function }) {
           <div className="body">{mounted && <Line />}</div>
 
           <div className="footer">
-            <Link href="/#">Ver mais</Link>
+            <Link href="/sensor/1">
+              <a>Ver mais</a>
+            </Link>
           </div>
         </div>
       </WarningViewBodySensor>
@@ -215,7 +217,7 @@ function Index(props: { user: User; openMenu: Function }) {
           </td>
           <td>{warning.factory}</td>
           <td>{warning.sector}</td>
-          <td>{dayjs(warning.timestamp).format('D/M/YYYY H:m:s')}</td>
+          <td>{dayjs(warning.timestamp).format("D/M/YYYY H:m:s")}</td>
         </tr>
       </>
     );
@@ -234,7 +236,7 @@ function Index(props: { user: User; openMenu: Function }) {
   return (
     <>
       <Layout>
-        <Page title={user.company.company_name}>
+        <Page title={user.company.company_name || "Dashboard"}>
           {/*<Content>*/}
           {/*  <Row>*/}
           {/*    <Card title="Slider">*/}
