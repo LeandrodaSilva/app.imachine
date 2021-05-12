@@ -88,17 +88,20 @@ const ArrowRight = styled(ArrowButton)`
 const Slide: FC<{
   id: string;
   children: Array<ReactNode>;
+  itemWidth?: string;
 }> = (props) => {
-  const { children, id } = props;
+  const { children, id, itemWidth } = props;
   const [count, setCount] = useState(children.length);
 
   const handleScroll = (evt) => {
     if (evt.deltaY > 0) {
       console.log("up");
-      evt.target.scrollBy(300, 0);
+      evt.target.scrollBy(width(), 0);
+      if (count < children.length) setCount(count + 1);
     } else {
       console.log("down");
-      evt.target.scrollBy(-300, 0);
+      evt.target.scrollBy(-width(), 0);
+      if (count > 0) setCount(count - 1);
     }
   };
 
@@ -129,7 +132,9 @@ const Slide: FC<{
 
         <Items id={id} onWheel={handleScroll}>
           {children.map((row, i) => (
-            <Item key={i}>{row}</Item>
+            <Item key={i} style={{ width: itemWidth || "100%" }}>
+              {row}
+            </Item>
           ))}
         </Items>
 
