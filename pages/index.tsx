@@ -161,6 +161,21 @@ function Index(props: { user: User; openMenu: Function }) {
               {renderWarningViewItem()}
               {renderWarningViewItem()}
             </div>
+
+            <div>
+              {renderWarningViewItem()}
+              {renderWarningViewItem()}
+            </div>
+
+            <div>
+              {renderWarningViewItem()}
+              {renderWarningViewItem()}
+            </div>
+
+            <div>
+              {renderWarningViewItem()}
+              {renderWarningViewItem()}
+            </div>
           </Slide>
           {/*<ol>*/}
           {/*  {renderWarningViewItem()}*/}
@@ -249,6 +264,16 @@ function Index(props: { user: User; openMenu: Function }) {
           {/*</Content>*/}
 
           <Content>
+            <Row>
+              <Card title="Organização">
+                {/* <Slide id={"slide-items-view"}>
+                  <div></div>
+
+                  <div></div>
+                </Slide> */}
+              </Card>
+            </Row>
+
             <Row>
               <Card title="Avisos">
                 <Table>

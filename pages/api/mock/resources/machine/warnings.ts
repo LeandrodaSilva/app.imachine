@@ -19,6 +19,22 @@ const Warnings: Array<Warning> = [
     sector: "Office",
     id: 2,
   },
+  {
+    name: "Nome da máquina",
+    timestamp: "2020-10-26 13:21:50",
+    color: "vermelho",
+    factory: "Campinas",
+    sector: "Office",
+    id: 2,
+  },
+  {
+    name: "Nome da máquina",
+    timestamp: "2020-10-26 13:21:50",
+    color: "vermelho",
+    factory: "Campinas",
+    sector: "Office",
+    id: 2,
+  },
 ];
 
 export default (req: NextApiRequest, res: NextApiResponse) => {

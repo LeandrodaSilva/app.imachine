@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import {ArrowBackIos, ArrowForwardIos} from "@material-ui/icons";
+import { ArrowBackIos, ArrowForwardIos } from "@material-ui/icons";
+import { ElementType, FC, ReactNode, useEffect, useState } from "react";
 
 const Container = styled.div`
   width: calc(100% - 50px);
@@ -44,35 +45,52 @@ const ArrowButton = styled.button`
   width: 30px;
   background-color: rgba(0, 0, 0, 0.64);
   border: 1px solid rgba(255, 255, 255, 0.13);
-  transition: opacity ease-in-out 0.5s;
+  transition: opacity ease-in-out 0.3s;
   color: white;
   margin: 3px;
-
-  &:hover {
-    cursor: pointer;
-    opacity: 0.6;
-  }
 
   &:focus {
     background-color: #272b41;
   }
-`
+
+  opacity: 0;
+
+  &.active {
+    opacity: 1;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+  }
+`;
 
 const ArrowLeft = styled(ArrowButton)`
-  border-radius: 100% 0 0 100%;
-`
+  border-radius: 100%;
+  height: 40px;
+  width: 40px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const ArrowRight = styled(ArrowButton)`
-  border-radius: 0 100% 100% 0;
-`
+  border-radius: 100%;
+  height: 40px;
+  width: 40px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
-interface SlideProps {
-  id: string
-  children: Array<any>;
-}
-
-function Slide(props: SlideProps) {
+const Slide: FC<{
+  id: string;
+  children: Array<ReactNode>;
+}> = (props) => {
   const { children, id } = props;
+  const [count, setCount] = useState(children.length);
 
   const handleScroll = (evt) => {
     if (evt.deltaY > 0) {
@@ -84,35 +102,49 @@ function Slide(props: SlideProps) {
     }
   };
 
-  const handleClickLeft = evt => {
-    document.getElementById(id)?.scrollBy(-300, 0);
-  }
+  const width = () => document.getElementById(id).offsetWidth;
 
-  const handleClickRight = evt => {
-    document.getElementById(id)?.scrollBy(300, 0);
-  }
+  const handleClickLeft = (evt) => {
+    document.getElementById(id)?.scrollBy(-width(), 0);
+    if (count > 0) setCount(count - 1);
+  };
+
+  const handleClickRight = (evt) => {
+    document.getElementById(id)?.scrollBy(width(), 0);
+    if (count < children.length) setCount(count + 1);
+  };
 
   return (
     <>
       <Container>
         <div>
-          <ArrowLeft type="button" onClick={handleClickLeft}>
-            <ArrowBackIos/>
+          <ArrowLeft
+            className={count > 0 ? "active" : ""}
+            type="button"
+            onClick={handleClickLeft}
+          >
+            <ArrowBackIos />
           </ArrowLeft>
         </div>
+
         <Items id={id} onWheel={handleScroll}>
-          {children.map((row) => (
-            <Item>{row}</Item>
+          {children.map((row, i) => (
+            <Item key={i}>{row}</Item>
           ))}
         </Items>
+
         <div>
-          <ArrowRight type="button" onClick={handleClickRight}>
-            <ArrowForwardIos/>
+          <ArrowRight
+            className={count < children.length ? "active" : ""}
+            type="button"
+            onClick={handleClickRight}
+          >
+            <ArrowForwardIos />
           </ArrowRight>
         </div>
       </Container>
     </>
   );
-}
+};
 
 export default Slide;
