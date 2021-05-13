@@ -102,7 +102,7 @@ function Tooltip(props: { title?: any; children?: any }) {
   const doLogout = (evt) => {
     evt.preventDefault();
 
-    Imachine.users
+    Imachine.Users
       .logout()
       .then((resp) => {
         localStorage.removeItem("session");

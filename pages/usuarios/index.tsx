@@ -180,7 +180,7 @@ const Usuarios: FC<any> = (props) => {
 
   useEffect(() => {
     if (mounted) {
-      Imachine.users.list().then((resp) => {
+      Imachine.Users.list().then((resp) => {
         console.log(resp);
         setUsers(resp);
       });

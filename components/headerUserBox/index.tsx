@@ -9,10 +9,12 @@ function HeaderUserBox(props) {
   const { user, isOpen } = props;
   const router = useRouter();
 
-  const doLogout = (evt) => {
+  const doLogout = async (evt) => {
     evt.preventDefault();
 
-    Imachine.users
+    Imachine
+      .interceptor()
+      .Users
       .logout()
       .then((resp) => {
         localStorage.removeItem("session");

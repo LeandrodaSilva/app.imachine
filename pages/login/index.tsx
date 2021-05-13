@@ -7,6 +7,7 @@ import { setUser } from "../../redux/actions/userActions";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { User } from "../../types";
+import { FormControl, MenuItem, TextField } from "@material-ui/core";
 
 interface LoginProps {
   user: User;
@@ -44,24 +45,26 @@ function Login(props: LoginProps) {
       return;
     }
 
-    try {
-      const resp = await Imachine.users.login(values.email, values.password);
-      console.log(resp);
-      if (resp.status === 200) {
+    Imachine.interceptor()
+      .Users.login(values.email, values.password)
+      .then((resp) => {
         const loggedUser = resp?.data?.results[0]?.data[0];
         setUser(loggedUser);
         localStorage.setItem("session", loggedUser.access_token);
         localStorage.setItem("user", JSON.stringify(loggedUser));
         router.push("/");
-      } else if (resp.status === 401) {
-        setErrors({ message: "Usuário não autorizado" });
-      } else {
-        setErrors(resp);
-        console.log("Erro ---- ", errors);
-      }
-    } catch (e) {
-      setErrors({ message: "Usuário não autorizado" });
-    }
+      })
+      .catch((err) => {
+        if (err.response) {
+          switch (err?.response?.data?.results[0]?.message) {
+            case "The username or password is incorrect.":
+              setErrors({ message: "E-mail ou senha incorretos." });
+              break;
+            default:
+              setErrors({ message: err?.response?.data?.results[0]?.message });
+          }
+        }
+      });
   };
 
   return (
@@ -79,29 +82,34 @@ function Login(props: LoginProps) {
           <form method="post">
             <fieldset>
               <div>
-                <InputLabel htmlFor="outlined-adornment">Usuário</InputLabel>
-                <OutlinedInput
-                  fullWidth
-                  id="outlined-adornment"
-                  type="email"
-                  value={values.email}
-                  required
-                  onChange={handleChange("email")}
-                />
+                <FormControl fullWidth>
+                  <TextField
+                    id="email"
+                    label="E-Mail"
+                    variant="standard"
+                    fullWidth
+                    size="small"
+                    value={values.email}
+                    required
+                    onChange={handleChange("email")}
+                  />
+                </FormControl>
               </div>
 
               <div>
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Senha
-                </InputLabel>
-                <OutlinedInput
-                  fullWidth
-                  id="outlined-adornment-password"
-                  type="password"
-                  value={values.password}
-                  required
-                  onChange={handleChange("password")}
-                />
+                <FormControl fullWidth>
+                  <TextField
+                    id="senha"
+                    label="Senha"
+                    type="password"
+                    variant="standard"
+                    fullWidth
+                    size="small"
+                    value={values.password}
+                    required
+                    onChange={handleChange("password")}
+                  />
+                </FormControl>
               </div>
             </fieldset>
 
