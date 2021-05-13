@@ -8,7 +8,6 @@ const imachine = axios.create({
   timeout: 1000,
   headers: {
     "Content-Type": "application/json",
-    Authorization: "Bearer " + localStorage.getItem("session"),
     "Access-Control-Allow-Origin": URL,
   },
 });

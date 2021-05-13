@@ -8,6 +8,23 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { User } from "../../types";
 import { FormControl, MenuItem, TextField } from "@material-ui/core";
+import {
+  createMuiTheme,
+  withStyles,
+  makeStyles,
+  ThemeProvider,
+} from "@material-ui/core/styles";
+import { purple, blueGrey } from "@material-ui/core/colors";
+
+const PrimaryButton = withStyles((theme) => ({
+  root: {
+    color: theme.palette.getContrastText(blueGrey[500]),
+    backgroundColor: blueGrey[500],
+    "&:hover": {
+      backgroundColor: blueGrey[700],
+    },
+  },
+}))(Button);
 
 interface LoginProps {
   user: User;
@@ -27,6 +44,7 @@ function Login(props: LoginProps) {
   });
   const router = useRouter();
   const [errors, setErrors] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -45,6 +63,9 @@ function Login(props: LoginProps) {
       return;
     }
 
+    setErrors({ message: "" });
+    setIsLoading(true);
+
     Imachine.interceptor()
       .Users.login(values.email, values.password)
       .then((resp) => {
@@ -55,6 +76,8 @@ function Login(props: LoginProps) {
         router.push("/");
       })
       .catch((err) => {
+        setIsLoading(false);
+
         if (err.response) {
           switch (err?.response?.data?.results[0]?.message) {
             case "The username or password is incorrect.":
@@ -119,12 +142,13 @@ function Login(props: LoginProps) {
               </Error>
             )}
 
-            <Button
-              style={{ backgroundColor: "#272B41", color: "white" }}
+            <PrimaryButton
+              variant="contained"
               onClick={doLogin}
+              disabled={isLoading}
             >
-              Logar
-            </Button>
+              {isLoading ? "Carregando..." : "Logar"}
+            </PrimaryButton>
           </form>
         </div>
       </div>
