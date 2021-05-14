@@ -39,7 +39,7 @@ const Imachine = {
 
   Users: {
     list: async (): Promise<Array<UserList | []>> => {
-      let resp = await imachine.get(`${URL}/resources/users/list`, {
+      let resp = await imachine.get(`/resources/users/list`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("session"),
@@ -55,7 +55,7 @@ const Imachine = {
 
     login: (email: string, password: string): Promise<AxiosResponse<any>> => {
       return imachine.post(
-        `${URL}/resources/users/login`,
+        `/resources/users/login`,
         {
           email: email,
           password: password,
@@ -69,19 +69,8 @@ const Imachine = {
     },
 
     logout: (): Promise<AxiosResponse<any>> => {
-      axios.interceptors.response.use(
-        (response) => {
-          return response;
-        },
-        (error) => {
-          if (error.response.status === 401) {
-            localStorage.removeItem("session");
-          }
-          return error;
-        }
-      );
       return imachine.put(
-        `${URL}/resources/users/logout`,
+        `/resources/users/logout`,
         {},
         {
           headers: {
@@ -95,7 +84,19 @@ const Imachine = {
 
   machine: {
     warnings: async (): Promise<Array<Warning> | []> => {
-      let resp = await axios.get(`${URL}/resources/machine/warnings`, {
+      axios.interceptors.response.use(
+        (response) => {
+          return response;
+        },
+        (error) => {
+          if (error.response.status === 401) {
+            localStorage.removeItem("session");
+          }
+          return Promise.reject(error);
+        }
+      );
+
+      let resp = await axios.get(`/resources/machine/warnings`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("session"),
