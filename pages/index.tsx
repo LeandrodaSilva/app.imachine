@@ -115,24 +115,39 @@ const Dot = styled.span`
 
 const UnidadeContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  flex-wrap: wrap;
 `;
 
 const Unidade = styled.div`
+  flex: 2;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 200px;
-  width: 150px;
+  min-height: 200px;
+  min-width: 150px;
+  width: max-content;
+  max-width: auto;
   margin: 0 10px;
   border-radius: 5px;
   font-size: 8px;
-  padding: 0 10px;
+  padding: 10px;
 
   .image {
     border-radius: 5px;
-    width: 150px;
+    /* width: 100px; */
+    min-width: 100px;
+    max-width: 100%;
+    /* height: 100px; */
+    min-height: 100px;
+    max-height: auto;
+    overflow: hidden;
+
+    .photo {
+      background-color: grey;
+      border-radius: 5px;
+    }
   }
 
   .info {
@@ -296,207 +311,165 @@ function Index(props: { user: User; openMenu: Function }) {
         <Page title={user.company.company_name || "Dashboard"}>
           <Content>
             <Row>
-              <Slide id={"slide-items"} itemWidth="150px">
-                {/* <UnidadeContainer> */}
-                <Unidade>
-                  <Img
-                    className="image"
-                    src="/img/factory.jpeg"
-                    objectFit={"cover"}
-                    width="auto"
-                    height={100}
-                  />
-
-                  <div className="info">
-                    <p className="name">Campinas</p>
-                    <p className="status">Em risco</p>
-                    <div className="alert">
-                      <p className="danger">4% máquinas em risco</p>
-                      <p className="warning">4% máquinas em alerta</p>
+              <Slide id={"slide-items"}>
+                <UnidadeContainer>
+                  <Unidade>
+                    <div className="image">
+                      <Img
+                        className="photo"
+                        src="/img/factory.jpeg"
+                        objectFit={"fill"}
+                        width="auto"
+                        height="auto"
+                        loading="lazy"
+                      />
                     </div>
-                  </div>
-                </Unidade>
 
-                <Unidade>
-                  <Img
-                    className="image"
-                    src="/img/factory2.jpg"
-                    objectFit={"cover"}
-                    width="auto"
-                    height={100}
-                  />
-
-                  <div className="info">
-                    <p className="name">São Paulo</p>
-                    <p className="status">Em risco</p>
-                    <div className="alert">
-                      <p className="warning">4% máquinas em alerta</p>
+                    <div className="info">
+                      <p className="name">Campinas</p>
+                      <p className="status">Em risco</p>
+                      <div className="alert">
+                        <p className="danger">4% máquinas em risco</p>
+                        <p className="warning">4% máquinas em alerta</p>
+                      </div>
                     </div>
-                  </div>
-                </Unidade>
+                  </Unidade>
 
-                <Unidade>
-                  <Img
-                    className="image"
-                    src="/img/factory3.jpg"
-                    objectFit={"cover"}
-                    width="auto"
-                    height={100}
-                  />
+                  <Unidade>
+                    <div className="image">
+                      <Img
+                        className="photo"
+                        src="/img/factory2.jpg"
+                        objectFit={"cover"}
+                        width="auto"
+                        height="auto"
+                      />
+                    </div>
 
-                  <div className="info">
-                    <p className="name">Campinas</p>
-                    <p className="status">Em risco</p>
-                    <div className="alert"></div>
-                  </div>
-                </Unidade>
+                    <div className="info">
+                      <p className="name">São Paulo</p>
+                      <p className="status">Em risco</p>
+                      <div className="alert">
+                        <p className="warning">4% máquinas em alerta</p>
+                      </div>
+                    </div>
+                  </Unidade>
 
-                <Unidade>
-                  <Img
-                    className="image"
-                    src="/img/factory.jpeg"
-                    objectFit={"cover"}
-                    width="auto"
-                    height={100}
-                  />
+                  <Unidade>
+                    <div className="image">
+                      <Img
+                        className="photo"
+                        src="/img/factory3.jpg"
+                        objectFit={"cover"}
+                        width="auto"
+                        height="auto"
+                      />
+                    </div>
 
-                  <div className="info">
-                    <p className="name">Campinas</p>
-                    <p className="status">Em risco</p>
-                    <div className="alert"></div>
-                  </div>
-                </Unidade>
+                    <div className="info">
+                      <p className="name">Campinas</p>
+                      <p className="status">Em risco</p>
+                      <div className="alert"></div>
+                    </div>
+                  </Unidade>
 
-                <Unidade>
-                  <Img
-                    className="image"
-                    src="/img/factory.jpeg"
-                    objectFit={"cover"}
-                    width="auto"
-                    height={100}
-                  />
+                  <Unidade>
+                    <div className="image">
+                      <Img
+                        className="photo"
+                        src="/img/factory2.jpg"
+                        objectFit={"cover"}
+                        width="auto"
+                        height="auto"
+                      />
+                    </div>
 
-                  <div className="info">
-                    <p className="name">Campinas</p>
-                    <p className="status">Em risco</p>
-                    <div className="alert"></div>
-                  </div>
-                </Unidade>
+                    <div className="info">
+                      <p className="name">Campinas</p>
+                      <p className="status">Em risco</p>
+                      <div className="alert"></div>
+                    </div>
+                  </Unidade>
+                </UnidadeContainer>
 
-                <Unidade>
-                  <Img
-                    className="image"
-                    src="/img/factory.jpeg"
-                    objectFit={"cover"}
-                    width="auto"
-                    height={100}
-                  />
+                <UnidadeContainer>
+                  <Unidade>
+                    <div className="image">
+                      <Img
+                        className="photo"
+                        src="/img/factory.jpeg"
+                        objectFit={"cover"}
+                        width="auto"
+                        height="auto"
+                      />
+                    </div>
 
-                  <div className="info">
-                    <p className="name">Campinas</p>
-                    <p className="status">Em risco</p>
-                    <div className="alert"></div>
-                  </div>
-                </Unidade>
-                {/* </UnidadeContainer> */}
+                    <div className="info">
+                      <p className="name">Campinas</p>
+                      <p className="status">Em risco</p>
+                      <div className="alert">
+                        <p className="danger">4% máquinas em risco</p>
+                        <p className="warning">4% máquinas em alerta</p>
+                      </div>
+                    </div>
+                  </Unidade>
 
-                {/* <UnidadeContainer> */}
-                <Unidade>
-                  <Img
-                    className="image"
-                    src="/img/factory.jpeg"
-                    objectFit={"cover"}
-                    width="auto"
-                    height={100}
-                  />
+                  <Unidade>
+                    <div className="image">
+                      <Img
+                        className="photo"
+                        src="/img/factory2.jpg"
+                        objectFit={"cover"}
+                        width="auto"
+                        height="auto"
+                      />
+                    </div>
 
-                  <div className="info">
-                    <p className="name">Campinas</p>
-                    <p className="status">Em risco</p>
-                    <div className="alert"></div>
-                  </div>
-                </Unidade>
+                    <div className="info">
+                      <p className="name">São Paulo</p>
+                      <p className="status">Em risco</p>
+                      <div className="alert">
+                        <p className="warning">4% máquinas em alerta</p>
+                      </div>
+                    </div>
+                  </Unidade>
 
-                <Unidade>
-                  <Img
-                    className="image"
-                    src="/img/factory.jpeg"
-                    objectFit={"cover"}
-                    width="auto"
-                    height={100}
-                  />
+                  <Unidade>
+                    <div className="image">
+                      <Img
+                        className="photo"
+                        src="/img/factory3.jpg"
+                        objectFit={"cover"}
+                        width="auto"
+                        height="auto"
+                      />
+                    </div>
 
-                  <div className="info">
-                    <p className="name">Campinas</p>
-                    <p className="status">Em risco</p>
-                    <div className="alert"></div>
-                  </div>
-                </Unidade>
+                    <div className="info">
+                      <p className="name">Campinas</p>
+                      <p className="status">Em risco</p>
+                      <div className="alert"></div>
+                    </div>
+                  </Unidade>
 
-                <Unidade>
-                  <Img
-                    className="image"
-                    src="/img/factory.jpeg"
-                    objectFit={"cover"}
-                    width="auto"
-                    height={100}
-                  />
+                  <Unidade>
+                    <div className="image">
+                      <Img
+                        className="photo"
+                        src="/img/factory2.jpg"
+                        objectFit={"cover"}
+                        width="auto"
+                        height="auto"
+                      />
+                    </div>
 
-                  <div className="info">
-                    <p className="name">Campinas</p>
-                    <p className="status">Em risco</p>
-                    <div className="alert"></div>
-                  </div>
-                </Unidade>
-
-                <Unidade>
-                  <Img
-                    className="image"
-                    src="/img/factory.jpeg"
-                    objectFit={"cover"}
-                    width="auto"
-                    height={100}
-                  />
-
-                  <div className="info">
-                    <p className="name">Campinas</p>
-                    <p className="status">Em risco</p>
-                    <div className="alert"></div>
-                  </div>
-                </Unidade>
-
-                <Unidade>
-                  <Img
-                    className="image"
-                    src="/img/factory.jpeg"
-                    objectFit={"cover"}
-                    width="auto"
-                    height={100}
-                  />
-
-                  <div className="info">
-                    <p className="name">Campinas</p>
-                    <p className="status">Em risco</p>
-                    <div className="alert"></div>
-                  </div>
-                </Unidade>
-
-                <Unidade>
-                  <Img
-                    className="image"
-                    src="/img/factory.jpeg"
-                    objectFit={"cover"}
-                    width="auto"
-                    height={100}
-                  />
-
-                  <div className="info">
-                    <p className="name">Campinas</p>
-                    <p className="status">Em risco</p>
-                    <div className="alert"></div>
-                  </div>
-                </Unidade>
-                {/* </UnidadeContainer> */}
+                    <div className="info">
+                      <p className="name">Campinas</p>
+                      <p className="status">Em risco</p>
+                      <div className="alert"></div>
+                    </div>
+                  </Unidade>
+                </UnidadeContainer>
               </Slide>
             </Row>
           </Content>

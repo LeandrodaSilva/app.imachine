@@ -91,31 +91,44 @@ const Slide: FC<{
   itemWidth?: string;
 }> = (props) => {
   const { children, id, itemWidth } = props;
-  const [count, setCount] = useState(children.length);
+  const [count, setCount] = useState(0);
 
   const handleScroll = (evt) => {
     if (evt.deltaY > 0) {
-      console.log("up");
-      evt.target.scrollBy(width(), 0);
-      if (count < children.length) setCount(count + 1);
+      if (count < children.length - 1) {
+        evt.target.scrollBy(width(), 0);
+        setCount(count + 1);
+      }
     } else {
-      console.log("down");
-      evt.target.scrollBy(-width(), 0);
-      if (count > 0) setCount(count - 1);
+      if (count > 0) {
+        evt.target.scrollBy(-width(), 0);
+        setCount(count - 1);
+      }
     }
   };
 
-  const width = () => document.getElementById(id).offsetWidth;
+  const width = () => {
+    let element = document.getElementById(id);
+    return element.offsetWidth;
+  };
 
   const handleClickLeft = (evt) => {
-    document.getElementById(id)?.scrollBy(-width(), 0);
-    if (count > 0) setCount(count - 1);
+    if (count > 0) {
+      document.getElementById(id)?.scrollBy(-width(), 0);
+      setCount(count - 1);
+    }
   };
 
   const handleClickRight = (evt) => {
-    document.getElementById(id)?.scrollBy(width(), 0);
-    if (count < children.length) setCount(count + 1);
+    if (count < children.length - 1) {
+      document.getElementById(id)?.scrollBy(width(), 0);
+      setCount(count + 1);
+    }
   };
+
+  useEffect(() => {
+    console.log(count);
+  }, [count]);
 
   return (
     <>
@@ -140,7 +153,7 @@ const Slide: FC<{
 
         <div>
           <ArrowRight
-            className={count < children.length ? "active" : ""}
+            className={count < children.length - 1 ? "active" : ""}
             type="button"
             onClick={handleClickRight}
           >
