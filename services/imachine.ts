@@ -2,10 +2,11 @@ import axios, { AxiosResponse } from "axios";
 import { UserList, Warning } from "../types";
 
 const URL = process.env.NEXT_PUBLIC_SERVICE_IMACHINE_URL || "";
+const PREFIX = process.env.NEXT_PUBLIC_SERVICE_IMACHINE_PREFIX || "";
+
 
 const imachine = axios.create({
-  baseURL: URL,
-  timeout: 1000,
+  baseURL: URL + PREFIX,
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": URL,
