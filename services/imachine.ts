@@ -96,7 +96,7 @@ const Imachine = {
         }
       );
 
-      let resp = await axios.get(`/resources/machine/warnings`, {
+      let resp = await imachine.get(`/resources/machine/warnings`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("session"),
