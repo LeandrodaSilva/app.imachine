@@ -162,7 +162,7 @@ function Sidebar(props) {
       <Container className={isOpen ? "block" : ""}>
         <nav className="menu">
           <ol className="list">
-            <Link href="/">
+            <a href="/">
               <BorderGradient active={router.pathname === "/"}>
                 <Item className="item" active={router.pathname === "/"}>
                   <Icon>
@@ -171,9 +171,9 @@ function Sidebar(props) {
                   <span>Dashboard</span>
                 </Item>
               </BorderGradient>
-            </Link>
+            </a>
 
-            <Link href="/organizacao">
+            <a href="/organizacao">
               <BorderGradient active={router.pathname === "/organizacao"}>
                 <Item className="item">
                   <Icon>
@@ -182,9 +182,9 @@ function Sidebar(props) {
                   <span>Organização</span>
                 </Item>
               </BorderGradient>
-            </Link>
+            </a>
 
-            <Link href="/usuarios">
+            <a href="/usuarios">
               <BorderGradient active={router.pathname === "/usuarios"}>
                 <Item className="item">
                   <Icon>
@@ -193,7 +193,7 @@ function Sidebar(props) {
                   <span>Usuários</span>
                 </Item>
               </BorderGradient>
-            </Link>
+            </a>
           </ol>
         </nav>
       </Container>
