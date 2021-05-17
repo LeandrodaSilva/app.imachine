@@ -4,7 +4,6 @@ import { UserList, Warning } from "../types";
 const URL = process.env.NEXT_PUBLIC_SERVICE_IMACHINE_URL || "";
 const PREFIX = process.env.NEXT_PUBLIC_SERVICE_IMACHINE_PREFIX || "";
 
-
 const imachine = axios.create({
   baseURL: URL + PREFIX,
   headers: {
@@ -70,6 +69,18 @@ const Imachine = {
     },
 
     logout: (): Promise<AxiosResponse<any>> => {
+      axios.interceptors.response.use(
+        (response) => {
+          return response;
+        },
+        (error) => {
+          if (error.response.status === 401) {
+            localStorage.removeItem("session");
+          }
+          return Promise.reject(error);
+        }
+      );
+
       return imachine.put(
         `/resources/users/logout`,
         {},
@@ -78,6 +89,47 @@ const Imachine = {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("session"),
           },
+        }
+      );
+    },
+
+    update: (data: {
+      user_id: number;
+      user?: string;
+      password?: string;
+      image?: string;
+    }): Promise<AxiosResponse<any>> => {
+      return imachine.put(`/resources/users/update`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("session"),
+        },
+      });
+    },
+
+    updatepermission: (data: {
+      permission_level: number;
+      user_id: number;
+    }): Promise<AxiosResponse<any>> => {
+      return imachine.put(`/resources/users/updatepermission`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("session"),
+        },
+      });
+    },
+
+    delete: (user_id: number): Promise<AxiosResponse<any>> => {
+      return imachine.delete(
+        `/resources/users/delete`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("session"),
+          },
+          data: {
+            user_id
+          }
         }
       );
     },

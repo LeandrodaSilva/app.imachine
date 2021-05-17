@@ -14,7 +14,7 @@ import {
 } from "@material-ui/icons";
 import { Button, TextField } from "@material-ui/core";
 import SidebarRight from "../../components/sidebarRight";
-import { openMenu } from "../../redux/actions/sidebarRightActions";
+import { closeMenu, openMenu } from "../../redux/actions/sidebarRightActions";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -165,27 +165,54 @@ const TableActionButton = styled.button`
 `;
 
 const Usuarios: FC<any> = (props) => {
-  const { openMenu } = props;
+  const { openMenu, closeMenu } = props;
   const [mounted, setMounted] = useState(false);
   const [users, setUsers] = useState<Array<UserList | []>>([]);
+  const [requireUpdate, setRequireUpdate] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [formValues, setFormValues] = useState<any>({
+    user_id: 0,
     user: "",
     email: "",
     permission: "",
   });
+
+  const saveUserChanges = (evt) => {
+    // Imachine.Users.update({
+    //   user_id: formValues.user_id,
+    //   user: formValues.user,
+    // }).then((resp) => {
+    //   console.log(resp);
+    // });
+
+    if (isLoading) return;
+
+    setIsLoading(true);
+
+    Imachine.Users.updatepermission({
+      user_id: formValues.user_id,
+      permission_level: formValues.permission,
+    }).then((resp) => {
+      setRequireUpdate(true);
+      setIsLoading(false);
+    });
+  };
+
+  const requestDeleteUser = (evt) => {};
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   useEffect(() => {
-    if (mounted) {
+    if (mounted && requireUpdate) {
+      setRequireUpdate(false);
       Imachine.Users.list().then((resp) => {
-        console.log(resp);
         setUsers(resp);
+        closeMenu();
       });
     }
-  }, [mounted]);
+  }, [mounted, requireUpdate]);
 
   const renderUser = (user: UserList, i: number) => {
     let permission = "";
@@ -212,6 +239,7 @@ const Usuarios: FC<any> = (props) => {
             color="primary"
             onClick={() => {
               setFormValues({
+                user_id: user.id,
                 user: user.user,
                 email: user.email,
                 permission: user.permission_level,
@@ -228,6 +256,7 @@ const Usuarios: FC<any> = (props) => {
             color="secondary"
             size="small"
             variant="outlined"
+            disabled={isLoading}
             onClick={() => {
               Swal.fire({
                 title: "Atenção!",
@@ -237,7 +266,12 @@ const Usuarios: FC<any> = (props) => {
                 confirmButtonColor: "#d30000",
                 cancelButtonText: "Não",
                 showCancelButton: true,
-              });
+                showLoaderOnConfirm: true,
+                preConfirm: () =>
+                  new Promise((resolve, reject) =>
+                    Imachine.Users.delete(user.id).then(resolve).catch(reject)
+                  ),
+              }).then(() => setRequireUpdate(true));
             }}
           >
             <DeleteTwoTone />
@@ -308,6 +342,13 @@ const Usuarios: FC<any> = (props) => {
                 fullWidth
                 size="small"
                 value={formValues.user}
+                disabled
+                onChange={(evt) =>
+                  setFormValues({
+                    ...formValues,
+                    ...{ user: evt.target.value },
+                  })
+                }
               />
             </FormControl>
           </div>
@@ -321,6 +362,13 @@ const Usuarios: FC<any> = (props) => {
                 fullWidth
                 size="small"
                 value={formValues.email}
+                disabled
+                onChange={(evt) =>
+                  setFormValues({
+                    ...formValues,
+                    ...{ email: evt.target.value },
+                  })
+                }
               />
             </FormControl>
           </div>
@@ -351,11 +399,11 @@ const Usuarios: FC<any> = (props) => {
                 component="button"
                 color="primary"
                 variant="outlined"
-                // size="small"
                 startIcon={<SaveTwoTone />}
-                // onClick={() => openMenu()}
+                onClick={saveUserChanges}
+                disabled={isLoading}
               >
-                Salvar
+                {isLoading ? "Carregando..." : "Salvar"}
               </Button>
             </ButtonsGroup>
           </div>
@@ -372,6 +420,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   openMenu: openMenu,
+  closeMenu: closeMenu,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Usuarios);

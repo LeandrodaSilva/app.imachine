@@ -102,13 +102,16 @@ function Tooltip(props: { title?: any; children?: any }) {
   const doLogout = (evt) => {
     evt.preventDefault();
 
-    Imachine.Users
-      .logout()
+    Imachine.interceptor()
+      .Users.logout()
       .then((resp) => {
         localStorage.removeItem("session");
         router.push("/login");
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        localStorage.removeItem("session");
+        router.push("/login");
+      });
   };
 
   return (
@@ -135,10 +138,10 @@ function Tooltip(props: { title?: any; children?: any }) {
         >
           <Typography>
             <List component="nav" aria-label="user userbox">
+              <ListItem button onClick={(evt) => router.push("/configuracoes")}>
+                <ListItemText primary="Configurações" />
+              </ListItem>
               <ListItem button onClick={doLogout}>
-                <ListItemIcon>
-                  <ExitToApp />
-                </ListItemIcon>
                 <ListItemText primary="Sair" />
               </ListItem>
             </List>
