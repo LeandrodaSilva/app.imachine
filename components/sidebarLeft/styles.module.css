@@ -1,0 +1,143 @@
+.container {
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 50px;
+  width: 240px;
+  height: 100%;
+  background-color: #081b2f;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.borderGradient {
+  background: #081b2f;
+  padding: 0px 0px 0px 3px;
+  border-radius: 4px;
+  transition: background ease-out 0.5s;
+}
+
+.borderGradient:hover {
+  background: linear-gradient(
+    to right,
+    #08a9fa,
+    #081b2f,
+    #081b2f,
+    #081b2f,
+    #081b2f,
+    #081b2f,
+    #081b2f,
+    #081b2f
+  );
+}
+
+.borderGradient.active {
+  background: linear-gradient(
+    to right,
+    #4bbef8,
+    #081b2f,
+    #081b2f,
+    #081b2f,
+    #081b2f
+  );
+}
+
+.children {
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.dimmer {
+  width: 100vw;
+  height: 100%;
+  display: block;
+  position: fixed;
+  top: 50px;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+  z-index: 999;
+}
+
+.item {
+  background-color: #081b2f;
+  display: flex;
+  align-items: center;
+  -webkit-box-align: center;
+  justify-content: flex-start;
+  width: 100%;
+  border-radius: 4px;
+  font-size: 14px;
+  color: hsla(0, 0%, 100%, 0.65) !important;
+  transition: background-color ease-out 0.5s;
+  padding: 0 30px;
+  color: #343952;
+  height: 40px;
+}
+
+.menu {
+  width: 100%;
+}
+
+.menu .list {
+  list-style: none;
+  width: 100%;
+  padding-left: 0;
+}
+
+.item:hover {
+  cursor: pointer;
+  background-color: rgba(184, 187, 205, 0.1);
+}
+
+.item svg {
+  margin-right: 15px;
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 0;
+  }
+  .container.block {
+    width: 240px;
+  }
+  .container.block .menu {
+    display: block;
+    left: 0;
+    top: 0;
+    position: absolute;
+  }
+  .open {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    color: black;
+    width: 280px;
+    max-width: 280px;
+    min-width: 280px;
+    height: 100%;
+    padding: 15px 15px 55px;
+    transition: width ease 0.1s;
+    z-index: 998;
+  }
+  .close .menu .list .item {
+    justify-content: center;
+  }
+  .close .menu .list .item svg {
+    margin-right: 0;
+    width: 100%;
+  }
+  .close .menu .list .item span {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .dimmer {
+    display: none;
+  }
+}
