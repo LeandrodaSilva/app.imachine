@@ -1,7 +1,6 @@
 import { closeMenu } from "../../redux/actions/menuActions";
 import { connect } from "react-redux";
 import styles from "./styles.module.css";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import {
   BusinessTwoTone,
@@ -22,7 +21,7 @@ function Sidebar(props) {
       >
         <nav className={styles.menu}>
           <ol className={styles.list}>
-            <Link href="/">
+            <a href="/">
               <div
                 className={
                   router.pathname === "/"
@@ -37,9 +36,9 @@ function Sidebar(props) {
                   <span>Dashboard</span>
                 </li>
               </div>
-            </Link>
+            </a>
 
-            <Link href="/organizacao">
+            <a href="/organizacao">
               <div
                 className={
                   router.pathname === "/organizacao"
@@ -54,9 +53,9 @@ function Sidebar(props) {
                   <span>Organização</span>
                 </li>
               </div>
-            </Link>
+            </a>
 
-            <Link href="/usuarios">
+            <a href="/usuarios">
               <div
                 className={
                   router.pathname === "/usuarios"
@@ -71,7 +70,7 @@ function Sidebar(props) {
                   <span>Usuários</span>
                 </li>
               </div>
-            </Link>
+            </a>
           </ol>
         </nav>
       </div>
