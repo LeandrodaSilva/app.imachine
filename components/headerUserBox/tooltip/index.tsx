@@ -6,7 +6,6 @@ import Button from "@material-ui/core/Button";
 import { useState } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import InboxIcon from "@material-ui/icons/Inbox";
@@ -37,50 +36,6 @@ const ColorButton = withStyles((theme) => ({
     backgroundColor: "transparent",
   },
 }))(Button);
-
-const Container = styled.div`
-  position: relative;
-  display: inline-block;
-  padding-right: 20px;
-
-  &:hover {
-    > span {
-      visibility: visible;
-    }
-  }
-`;
-
-const Body = styled.span`
-  visibility: hidden;
-  background-color: #ffffff;
-  color: #000000;
-  text-align: center;
-  padding: 10px;
-  border-radius: 6px;
-
-  position: absolute;
-  z-index: 2;
-
-  width: 120px;
-  top: 110%;
-  left: 60%;
-  margin-left: -110px;
-
-  &:after {
-    content: " ";
-    position: absolute;
-    bottom: 100%;
-    left: 550%;
-    margin-left: 25px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent #ffffff transparent;
-  }
-`;
-
-const UserButton = styled(Button)`
-  background-color: transparent;
-`;
 
 function Tooltip(props: { title?: any; children?: any }) {
   const { title, children } = props;
