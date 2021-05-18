@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { AccountCircleTwoTone, ExitToApp } from "@material-ui/icons";
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
@@ -7,41 +6,15 @@ import { useState } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
-import InboxIcon from "@material-ui/icons/Inbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
 import Imachine from "../../../services/imachine";
 import { useRouter } from "next/router";
-import { withStyles } from "@material-ui/core";
-import {
-  green,
-  purple,
-  common,
-  deepOrange,
-  deepPurple,
-} from "@material-ui/core/colors";
 import Avatar from "@material-ui/core/Avatar";
-import { makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  color: {
-    color: "black",
-    backgroundColor: "white",
-  },
-}));
-
-const ColorButton = withStyles((theme) => ({
-  root: {
-    color: common.white,
-    backgroundColor: "transparent",
-  },
-}))(Button);
+import styles from "./styles.module.scss";
 
 function Tooltip(props: { title?: any; children?: any }) {
   const { title, children } = props;
   const [anchorEl, setAnchorEl] = useState(null);
   const router = useRouter();
-  const classes = useStyles();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -72,11 +45,11 @@ function Tooltip(props: { title?: any; children?: any }) {
   return (
     <>
       <div>
-        <ColorButton aria-describedby={id} onClick={handleClick}>
-          <Avatar className={classes.color}>
+        <Button aria-describedby={id} onClick={handleClick}>
+          <Avatar className={styles.color}>
             <AccountCircleTwoTone />
           </Avatar>
-        </ColorButton>
+        </Button>
         <Popover
           id={id}
           open={open}

@@ -1,95 +1,13 @@
-import styled from "styled-components";
 import { ArrowBackIos, ArrowForwardIos } from "@material-ui/icons";
 import { ElementType, FC, ReactNode, useEffect, useState } from "react";
-
-const Container = styled.div`
-  width: calc(100% - 50px);
-  display: flex;
-  align-items: center;
-  justify-content: stretch;
-  height: 100%;
-`;
-
-const Items = styled.div`
-  height: 100%;
-  flex: 4;
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  color: black;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
-const Item = styled.div`
-  flex: none;
-  width: 100%;
-  height: 100%;
-  scroll-snap-align: start;
-  pointer-events: none;
-
-  img {
-    width: 300px;
-    height: auto;
-    object-fit: cover;
-  }
-`;
-
-const ArrowButton = styled.button`
-  flex: 1;
-  height: 50px;
-  width: 30px;
-  background-color: rgba(0, 0, 0, 0.64);
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  transition: opacity ease-in-out 0.3s;
-  color: white;
-  margin: 3px;
-
-  &:focus {
-    background-color: #272b41;
-  }
-
-  opacity: 0;
-
-  &.active {
-    opacity: 1;
-
-    &:hover {
-      cursor: pointer;
-      opacity: 0.6;
-    }
-  }
-`;
-
-const ArrowLeft = styled(ArrowButton)`
-  border-radius: 100%;
-  height: 40px;
-  width: 40px;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ArrowRight = styled(ArrowButton)`
-  border-radius: 100%;
-  height: 40px;
-  width: 40px;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Slide: FC<{
+import styles from "./styles.module.scss";
+interface SlideProps {
   id: string;
   children: Array<ReactNode>;
   itemWidth?: string;
-}> = (props) => {
+}
+
+const Slide: FC<SlideProps> = (props) => {
   const { children, id, itemWidth } = props;
   const [count, setCount] = useState(0);
 
@@ -126,41 +44,49 @@ const Slide: FC<{
     }
   };
 
-  useEffect(() => {
-    console.log(count);
-  }, [count]);
-
   return (
     <>
-      <Container>
+      <div className={styles.container}>
         <div>
-          <ArrowLeft
-            className={count > 0 ? "active" : ""}
+          <button
+            className={
+              count > 0
+                ? `${styles.arrowButton} ${styles.active}`
+                : styles.arrowButton
+            }
             type="button"
             onClick={handleClickLeft}
           >
             <ArrowBackIos />
-          </ArrowLeft>
+          </button>
         </div>
 
-        <Items id={id} onWheel={handleScroll}>
+        <ul className={styles.items} id={id} onWheel={handleScroll}>
           {children.map((row, i) => (
-            <Item key={i} style={{ width: itemWidth || "100%" }}>
+            <li
+              className={styles.item}
+              key={i}
+              style={{ width: itemWidth || "100%" }}
+            >
               {row}
-            </Item>
+            </li>
           ))}
-        </Items>
+        </ul>
 
         <div>
-          <ArrowRight
-            className={count < children.length - 1 ? "active" : ""}
+          <button
+            className={
+              count < children.length - 1
+                ? `${styles.arrowButton} ${styles.active}`
+                : styles.arrowButton
+            }
             type="button"
             onClick={handleClickRight}
           >
             <ArrowForwardIos />
-          </ArrowRight>
+          </button>
         </div>
-      </Container>
+      </div>
     </>
   );
 };
