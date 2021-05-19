@@ -88,10 +88,10 @@ const View: FC<{ title: string }> = (props) => {
 const Organizacao: FC<any> = (props) => {
   const { openMenu } = props;
   const classes = useStyles();
-  const [open, setOpen] = useState(true);
-  const [openCampinas, setOpenCampinas] = useState(true);
-  const [open2, setOpen2] = useState(true);
-  const [open3, setOpen3] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [openCampinas, setOpenCampinas] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
   const [selectedView, setSelectedView] = useState("");
   const router = useRouter();
 
