@@ -1,6 +1,5 @@
 import Layout from "../components/layout";
 import Page from "../components/page";
-import styled from "styled-components";
 import { setUser } from "../redux/actions/userActions";
 import { connect } from "react-redux";
 import { User, Warning } from "../types";
@@ -16,169 +15,9 @@ import Slide from "../components/slide";
 import TableLoading from "../components/loadingTable";
 import dayjs from "dayjs";
 import Img from "next/image";
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 100%;
-  padding-bottom: 40px;
-`;
-
-const Content = styled.div`
-  height: auto;
-  display: block;
-`;
-
-const WarningView = styled.div`
-  padding: 0 5px;
-`;
-
-const WarningViewHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 50px;
-
-  h2,
-  span {
-    font-size: 28px;
-    font-weight: lighter;
-  }
-
-  span {
-    color: red;
-  }
-`;
-
-const WarningViewBody = styled.div`
-  display: flex;
-  align-items: start;
-  justify-content: center;
-`;
-
-const WarningViewBodySensor = styled.div`
-  color: white;
-  padding-bottom: 20px;
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .body {
-    height: auto;
-    border-radius: 8px;
-    background-color: #0a213a;
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
-  }
-
-  .footer {
-    padding-top: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-`;
-
-const Table = styled.table`
-  width: 100%;
-  padding-left: 10px;
-  margin: 20px;
-  min-height: 100px;
-
-  tr {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(189, 189, 189, 0.2);
-    width: available;
-    padding: 4px;
-
-    &:hover {
-      cursor: pointer;
-      background-color: rgba(180, 180, 180, 0.2);
-    }
-  }
-`;
-
-const Dot = styled.span`
-  padding-right: 10px;
-`;
-
-const UnidadeContainer = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
-
-const Unidade = styled.div`
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-height: 200px;
-  min-width: 150px;
-  width: max-content;
-  max-width: auto;
-  margin: 0 10px;
-  border-radius: 5px;
-  font-size: 8px;
-  padding: 10px;
-
-  .image {
-    border-radius: 5px;
-    /* width: 100px; */
-    min-width: 100px;
-    max-width: 100%;
-    /* height: 100px; */
-    min-height: 100px;
-    max-height: auto;
-    overflow: hidden;
-
-    .photo {
-      background-color: grey;
-      border-radius: 5px;
-    }
-  }
-
-  .info {
-    margin-top: 5px;
-
-    p.name {
-      font-size: 16px;
-    }
-
-    p.status {
-      font-size: 12px;
-      color: grey;
-    }
-
-    div.alert {
-      padding-top: 5px;
-
-      p {
-        font-size: 10px;
-      }
-
-      p.danger {
-        color: red;
-      }
-
-      p.warning {
-        color: orange;
-      }
-    }
-  }
-`;
+import Content from "../components/content";
+import Column from "../components/column";
+import styles from "../styles/index.module.scss";
 
 function Index(props: { user: User; openMenu: Function }) {
   const { user, openMenu } = props;
@@ -190,35 +29,35 @@ function Index(props: { user: User; openMenu: Function }) {
 
   const renderWarningViewItem = () => {
     return (
-      <WarningViewBodySensor>
+      <div className={styles.warningViewBodySensor}>
         <div>
-          <div className="header">
+          <div className={styles.header}>
             <p>Mancal dianteiro motor</p>
             <span>80%</span>
           </div>
 
-          <div className="body">{mounted && <Line />}</div>
+          <div className={styles.body}>{mounted && <Line />}</div>
 
-          <div className="footer">
+          <div className={styles.footer}>
             <Link href="/sensor/1">
               <a>Ver mais</a>
             </Link>
           </div>
         </div>
-      </WarningViewBodySensor>
+      </div>
     );
   };
 
   const renderWarningView = () => {
     return (
-      <WarningView>
-        <WarningViewHeader>
+      <div className={styles.warningView}>
+        <div className={styles.warningViewHeader}>
           <h2>{selectedWarning.name}</h2>
           <span>
             <WarningTwoTone color={"error"} /> 10%
           </span>
-        </WarningViewHeader>
-        <WarningViewBody>
+        </div>
+        <div className={styles.warningViewBody}>
           <Slide id={"slide-items-view"}>
             <div>
               {renderWarningViewItem()}
@@ -245,8 +84,8 @@ function Index(props: { user: User; openMenu: Function }) {
               {renderWarningViewItem()}
             </div>
           </Slide>
-        </WarningViewBody>
-      </WarningView>
+        </div>
+      </div>
     );
   };
 
@@ -283,9 +122,9 @@ function Index(props: { user: User; openMenu: Function }) {
         }}
       >
         <td>
-          <Dot>
+          <span className={styles.dot}>
             <FiberManualRecordTwoTone color={color} fontSize={"inherit"} />
-          </Dot>{" "}
+          </span>{" "}
           {warning.name}
         </td>
         <td>{warning.factory}</td>
@@ -310,13 +149,13 @@ function Index(props: { user: User; openMenu: Function }) {
       <Layout>
         <Page title={user.company.company_name || "Dashboard"}>
           <Content>
-            <Row>
+            <Column>
               <Slide id={"slide-items"}>
-                <UnidadeContainer>
-                  <Unidade>
-                    <div className="image">
+                <div className={styles.unidadeContainer}>
+                  <div className={styles.unidade}>
+                    <div className={styles.image}>
                       <Img
-                        className="photo"
+                        className={styles.photo}
                         src="/img/factory.jpeg"
                         objectFit={"fill"}
                         width="auto"
@@ -325,20 +164,20 @@ function Index(props: { user: User; openMenu: Function }) {
                       />
                     </div>
 
-                    <div className="info">
-                      <p className="name">Campinas</p>
-                      <p className="status">Em risco</p>
-                      <div className="alert">
+                    <div className={styles.info}>
+                      <p className={styles.name}>Campinas</p>
+                      <p className={styles.status}>Em risco</p>
+                      <div className={styles.alert}>
                         <p className="danger">4% máquinas em risco</p>
-                        <p className="warning">4% máquinas em alerta</p>
+                        <p className={styles.warning}>4% máquinas em alerta</p>
                       </div>
                     </div>
-                  </Unidade>
+                  </div>
 
-                  <Unidade>
-                    <div className="image">
+                  <div className={styles.unidade}>
+                    <div className={styles.image}>
                       <Img
-                        className="photo"
+                        className={styles.photo}
                         src="/img/factory2.jpg"
                         objectFit={"cover"}
                         width="auto"
@@ -346,19 +185,19 @@ function Index(props: { user: User; openMenu: Function }) {
                       />
                     </div>
 
-                    <div className="info">
-                      <p className="name">São Paulo</p>
-                      <p className="status">Em risco</p>
-                      <div className="alert">
-                        <p className="warning">4% máquinas em alerta</p>
+                    <div className={styles.info}>
+                      <p className={styles.name}>São Paulo</p>
+                      <p className={styles.status}>Em risco</p>
+                      <div className={styles.alert}>
+                        <p className={styles.warning}>4% máquinas em alerta</p>
                       </div>
                     </div>
-                  </Unidade>
+                  </div>
 
-                  <Unidade>
-                    <div className="image">
+                  <div className={styles.unidade}>
+                    <div className={styles.image}>
                       <Img
-                        className="photo"
+                        className={styles.photo}
                         src="/img/factory3.jpg"
                         objectFit={"cover"}
                         width="auto"
@@ -366,17 +205,17 @@ function Index(props: { user: User; openMenu: Function }) {
                       />
                     </div>
 
-                    <div className="info">
-                      <p className="name">Campinas</p>
-                      <p className="status">Em risco</p>
-                      <div className="alert"></div>
+                    <div className={styles.info}>
+                      <p className={styles.name}>Campinas</p>
+                      <p className={styles.status}>Em risco</p>
+                      <div className={styles.alert}></div>
                     </div>
-                  </Unidade>
+                  </div>
 
-                  <Unidade>
-                    <div className="image">
+                  <div className={styles.unidade}>
+                    <div className={styles.image}>
                       <Img
-                        className="photo"
+                        className={styles.photo}
                         src="/img/factory2.jpg"
                         objectFit={"cover"}
                         width="auto"
@@ -384,19 +223,19 @@ function Index(props: { user: User; openMenu: Function }) {
                       />
                     </div>
 
-                    <div className="info">
-                      <p className="name">Campinas</p>
-                      <p className="status">Em risco</p>
-                      <div className="alert"></div>
+                    <div className={styles.info}>
+                      <p className={styles.name}>Campinas</p>
+                      <p className={styles.status}>Em risco</p>
+                      <div className={styles.alert}></div>
                     </div>
-                  </Unidade>
-                </UnidadeContainer>
+                  </div>
+                </div>
 
-                <UnidadeContainer>
-                  <Unidade>
-                    <div className="image">
+                <div className={styles.unidadeContainer}>
+                  <div className={styles.unidade}>
+                    <div className={styles.image}>
                       <Img
-                        className="photo"
+                        className={styles.photo}
                         src="/img/factory.jpeg"
                         objectFit={"cover"}
                         width="auto"
@@ -404,20 +243,20 @@ function Index(props: { user: User; openMenu: Function }) {
                       />
                     </div>
 
-                    <div className="info">
-                      <p className="name">Campinas</p>
-                      <p className="status">Em risco</p>
-                      <div className="alert">
+                    <div className={styles.info}>
+                      <p className={styles.name}>Campinas</p>
+                      <p className={styles.status}>Em risco</p>
+                      <div className={styles.alert}>
                         <p className="danger">4% máquinas em risco</p>
-                        <p className="warning">4% máquinas em alerta</p>
+                        <p className={styles.warning}>4% máquinas em alerta</p>
                       </div>
                     </div>
-                  </Unidade>
+                  </div>
 
-                  <Unidade>
-                    <div className="image">
+                  <div className={styles.unidade}>
+                    <div className={styles.image}>
                       <Img
-                        className="photo"
+                        className={styles.photo}
                         src="/img/factory2.jpg"
                         objectFit={"cover"}
                         width="auto"
@@ -425,19 +264,19 @@ function Index(props: { user: User; openMenu: Function }) {
                       />
                     </div>
 
-                    <div className="info">
-                      <p className="name">São Paulo</p>
-                      <p className="status">Em risco</p>
-                      <div className="alert">
-                        <p className="warning">4% máquinas em alerta</p>
+                    <div className={styles.info}>
+                      <p className={styles.name}>São Paulo</p>
+                      <p className={styles.status}>Em risco</p>
+                      <div className={styles.alert}>
+                        <p className={styles.warning}>4% máquinas em alerta</p>
                       </div>
                     </div>
-                  </Unidade>
+                  </div>
 
-                  <Unidade>
-                    <div className="image">
+                  <div className={styles.unidade}>
+                    <div className={styles.image}>
                       <Img
-                        className="photo"
+                        className={styles.photo}
                         src="/img/factory3.jpg"
                         objectFit={"cover"}
                         width="auto"
@@ -445,17 +284,17 @@ function Index(props: { user: User; openMenu: Function }) {
                       />
                     </div>
 
-                    <div className="info">
-                      <p className="name">Campinas</p>
-                      <p className="status">Em risco</p>
-                      <div className="alert"></div>
+                    <div className={styles.info}>
+                      <p className={styles.name}>Campinas</p>
+                      <p className={styles.status}>Em risco</p>
+                      <div className={styles.alert}></div>
                     </div>
-                  </Unidade>
+                  </div>
 
-                  <Unidade>
-                    <div className="image">
+                  <div className={styles.unidade}>
+                    <div className={styles.image}>
                       <Img
-                        className="photo"
+                        className={styles.photo}
                         src="/img/factory2.jpg"
                         objectFit={"cover"}
                         width="auto"
@@ -463,30 +302,30 @@ function Index(props: { user: User; openMenu: Function }) {
                       />
                     </div>
 
-                    <div className="info">
-                      <p className="name">Campinas</p>
-                      <p className="status">Em risco</p>
-                      <div className="alert"></div>
+                    <div className={styles.info}>
+                      <p className={styles.name}>Campinas</p>
+                      <p className={styles.status}>Em risco</p>
+                      <div className={styles.alert}></div>
                     </div>
-                  </Unidade>
-                </UnidadeContainer>
+                  </div>
+                </div>
               </Slide>
-            </Row>
+            </Column>
           </Content>
 
           <Content>
-            <Row>
+            <Column>
               <Card title="Avisos">
-                <Table>
+                <table className={styles.table}>
                   <thead />
                   {arrWarnings.length ? (
                     <tbody>{arrWarnings.map(renderWarnings)}</tbody>
                   ) : (
                     <TableLoading />
                   )}
-                </Table>
+                </table>
               </Card>
-            </Row>
+            </Column>
           </Content>
         </Page>
       </Layout>

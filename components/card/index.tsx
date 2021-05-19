@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FC } from "react";
 
 interface CardProps {
   title?: string;
@@ -45,11 +46,11 @@ const Body = styled.div`
   width: auto;
 `;
 
-function Card(props: CardProps) {
+const Card: FC<CardProps> = (props) => {
   const { children, title } = props;
 
   return (
-    <>
+    <div className="card">
       <Container>
         {title && (
           <Header>
@@ -58,8 +59,8 @@ function Card(props: CardProps) {
         )}
         <Body>{children}</Body>
       </Container>
-    </>
+    </div>
   );
-}
+};
 
 export default Card;

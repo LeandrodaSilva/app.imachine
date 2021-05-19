@@ -66,9 +66,12 @@ function Tooltip(props: { title?: any; children?: any }) {
         >
           <Typography>
             <List component="nav" aria-label="user userbox">
-              <ListItem button onClick={(evt) => router.push("/configuracoes")}>
-                <ListItemText primary="Configurações" />
+              <ListItem button onClick={(evt) => router.push("/perfil")}>
+                <ListItemText primary="Perfil" />
               </ListItem>
+              {/*<ListItem button onClick={(evt) => router.push("/configuracoes")}>*/}
+              {/*  <ListItemText primary="Configurações" />*/}
+              {/*</ListItem>*/}
               <ListItem button onClick={doLogout}>
                 <ListItemText primary="Sair" />
               </ListItem>
