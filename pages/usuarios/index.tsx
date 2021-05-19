@@ -1,6 +1,5 @@
 import Page from "../../components/page";
 import Layout from "../../components/layout";
-import styled from "styled-components";
 import Card from "../../components/card";
 import React, { FC, useEffect, useState } from "react";
 import Imachine from "../../services/imachine";
@@ -9,7 +8,6 @@ import {
   AddTwoTone,
   DeleteTwoTone,
   EditTwoTone,
-  RemoveTwoTone,
   SaveTwoTone,
 } from "@material-ui/icons";
 import { Button, TextField } from "@material-ui/core";
@@ -19,150 +17,11 @@ import { connect } from "react-redux";
 import Swal from "sweetalert2";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import TableLoading from "../../components/loadingTable";
-
-const ButtonsGroup = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-bottom: 10px;
-
-  > button {
-    color: black;
-    margin: 3px;
-  }
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 100%;
-  padding-bottom: 40px;
-`;
-
-const Content = styled.div`
-  height: auto;
-  display: block;
-`;
-
-const WarningView = styled.div`
-  padding: 0 5px;
-`;
-
-const WarningViewHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 50px;
-  padding-left: 50px;
-  padding-right: 50px;
-
-  h2,
-  span {
-    font-size: 28px;
-    font-weight: lighter;
-  }
-
-  span {
-    color: red;
-  }
-`;
-
-const WarningViewBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding-left: 50px;
-  padding-right: 50px;
-
-  .form-group {
-    width: 100%;
-    padding-bottom: 20px;
-  }
-`;
-
-const WarningViewBodySensor = styled.div`
-  color: white;
-  padding-bottom: 20px;
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .body {
-    height: auto;
-    border-radius: 8px;
-    background-color: #2a2e44;
-  }
-
-  .footer {
-    padding-top: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-`;
-
-const Table = styled.table`
-  width: 100%;
-  padding-left: 10px;
-  margin: 20px;
-  min-height: 100px;
-
-  thead {
-    font-weight: "bold";
-    font-size: 1.1em;
-    opacity: 0.7;
-  }
-
-  tbody {
-    tr {
-      /* display: flex; */
-      /* align-items: center; */
-      /* justify-content: space-between; */
-      border-bottom: 1px solid rgba(189, 189, 189, 0.2);
-      width: available;
-      padding: 4px;
-
-      &:nth-child(even) {
-        background-color: #eeecec;
-      }
-
-      td {
-        text-align: center;
-        button {
-          margin-right: 3px;
-        }
-      }
-
-      /* &:hover {
-      cursor: pointer;
-      background-color: rgba(180, 180, 180, 0.2);
-    } */
-    }
-  }
-`;
-
-const Dot = styled.span`
-  padding-right: 10px;
-`;
-
-const TableActionButton = styled.button`
-  background-color: white;
-`;
+import styles from "./styles.module.scss";
+import Content from "../../components/content";
+import { Row } from "react-bootstrap";
 
 const Usuarios: FC<any> = (props) => {
   const { openMenu, closeMenu } = props;
@@ -197,8 +56,6 @@ const Usuarios: FC<any> = (props) => {
       setIsLoading(false);
     });
   };
-
-  const requestDeleteUser = (evt) => {};
 
   useEffect(() => {
     setMounted(true);
@@ -286,7 +143,7 @@ const Usuarios: FC<any> = (props) => {
       <Page title="Configuração de Usuários">
         <Content>
           <Row>
-            <ButtonsGroup>
+            <div className={styles.buttonsGroup}>
               <Button
                 component="button"
                 color="primary"
@@ -304,35 +161,32 @@ const Usuarios: FC<any> = (props) => {
               >
                 Adicionar
               </Button>
-            </ButtonsGroup>
+            </div>
             <Card title="">
-              <Table>
+              <table className={styles.table}>
                 <thead>
                   <tr>
                     <th>Nome</th>
-                    {/* atributo de username não disponível no endpoint */}
-                    {/* <th>Usuário</th>  */}
                     <th>E-mail</th>
                     <th>Permissão</th>
                     <th>Ações</th>
                   </tr>
                 </thead>
                 <tbody>{users.map(renderUser)}</tbody>
-              </Table>
+              </table>
             </Card>
           </Row>
         </Content>
       </Page>
 
       <SidebarRight color="light">
-        <WarningView>
-          <WarningViewHeader>
+        <div className={styles.userView}>
+          <div className={styles.userViewHeader}>
             <h2>Usuário</h2>
             <span></span>
-          </WarningViewHeader>
-        </WarningView>
-        <WarningViewBody>
-          {/* <form action=""> */}
+          </div>
+        </div>
+        <div className={styles.userViewBody}>
           <div className="form-group">
             <FormControl fullWidth>
               <TextField
@@ -394,7 +248,7 @@ const Usuarios: FC<any> = (props) => {
           </div>
 
           <div className="form-group">
-            <ButtonsGroup>
+            <div className={styles.buttonsGroup}>
               <Button
                 component="button"
                 color="primary"
@@ -405,10 +259,9 @@ const Usuarios: FC<any> = (props) => {
               >
                 {isLoading ? "Carregando..." : "Salvar"}
               </Button>
-            </ButtonsGroup>
+            </div>
           </div>
-          {/* </form> */}
-        </WarningViewBody>
+        </div>
       </SidebarRight>
     </Layout>
   );
