@@ -187,7 +187,7 @@ const Usuarios: FC<any> = (props) => {
           </div>
         </div>
         <div className={styles.userViewBody}>
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <FormControl fullWidth>
               <TextField
                 id="nome"
@@ -207,7 +207,7 @@ const Usuarios: FC<any> = (props) => {
             </FormControl>
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <FormControl fullWidth>
               <TextField
                 id="email"
@@ -227,7 +227,7 @@ const Usuarios: FC<any> = (props) => {
             </FormControl>
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <FormControl variant="standard" fullWidth size="small">
               <InputLabel htmlFor="permission_level">Permissão</InputLabel>
               <Select
@@ -247,7 +247,7 @@ const Usuarios: FC<any> = (props) => {
             </FormControl>
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <div className={styles.buttonsGroup}>
               <Button
                 component="button"
