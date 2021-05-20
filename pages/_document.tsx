@@ -43,6 +43,10 @@ export default class MyDocument extends Document {
           <meta name="description" content="iMachine website" />
           <meta name="og:title" content="iMachine" />
           <meta name="twitter:card" content="summary_large_image" />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          />
         </Head>
         <body>
           <Main />

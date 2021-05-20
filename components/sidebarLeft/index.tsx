@@ -7,6 +7,7 @@ import {
   HomeTwoTone,
   PersonTwoTone,
 } from "@material-ui/icons";
+import Link from "next/link";
 
 function Sidebar(props) {
   const router = useRouter();
@@ -38,7 +39,7 @@ function Sidebar(props) {
               </div>
             </a>
 
-            <a href="/organizacao">
+            <Link href="/organizacao">
               <div
                 className={
                   router.pathname === "/organizacao"
@@ -53,7 +54,7 @@ function Sidebar(props) {
                   <span>Organização</span>
                 </li>
               </div>
-            </a>
+            </Link>
 
             <a href="/usuarios">
               <div

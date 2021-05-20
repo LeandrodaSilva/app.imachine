@@ -35,6 +35,7 @@ import {
 } from "@material-ui/icons";
 import {
   FormControl,
+  Icon,
   InputLabel,
   MenuItem,
   Select,
@@ -566,7 +567,7 @@ const Organizacao: FC<any> = (props) => {
             <ListItem button onClick={(evt) => setSelectedView("unidade")}>
               <ListItemAvatar>
                 <Avatar>
-                  <BusinessTwoTone />
+                  <Icon>business</Icon>
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary="Unidade" />
@@ -626,7 +627,7 @@ const Organizacao: FC<any> = (props) => {
                 <Button
                   component="button"
                   color="primary"
-                  startIcon={<AddTwoTone />}
+                  startIcon={<Icon>add</Icon>}
                   variant="outlined"
                   onClick={() => {
                     resetStateOfSidebarMenuRight();
@@ -655,7 +656,7 @@ const Organizacao: FC<any> = (props) => {
                       }}
                     >
                       <ListItemIcon>
-                        <BusinessTwoTone />
+                        <Icon>business</Icon>
                       </ListItemIcon>
                       <ListItemText primary="Campinas" />
                       {openCampinas ? <ExpandLess /> : <ExpandMore />}
@@ -787,7 +788,7 @@ const Organizacao: FC<any> = (props) => {
 
                     <ListItem button onClick={handleClick}>
                       <ListItemIcon>
-                        <BusinessTwoTone />
+                        <Icon>business</Icon>
                       </ListItemIcon>
                       <ListItemText primary="Bauru" />
                       {open ? <ExpandLess /> : <ExpandMore />}
